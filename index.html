@@ -9,8 +9,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:#0d0f14;color:#e2e8f0;min-height:100vh;}
-
-/* Gate */
 #gate{position:fixed;inset:0;background:#0d0f14;display:flex;align-items:center;justify-content:center;z-index:9999;}
 .gate-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:40px 48px;text-align:center;min-width:320px;}
 .gate-logo{font-size:13px;font-weight:600;color:#378ADD;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;}
@@ -23,8 +21,6 @@ body{font-family:'DM Sans',sans-serif;background:#0d0f14;color:#e2e8f0;min-heigh
 .gate-btn{margin-top:14px;width:100%;padding:11px;background:#378ADD;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
 .gate-btn:hover{opacity:.85;}
 .gate-err{font-size:11px;color:#f87171;margin-top:10px;min-height:16px;}
-
-/* Layout */
 #app{display:none;}
 .dash{padding:24px 28px;max-width:1200px;margin:0 auto;}
 .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
@@ -35,8 +31,6 @@ body{font-family:'DM Sans',sans-serif;background:#0d0f14;color:#e2e8f0;min-heigh
 .update-banner{font-size:10px;color:#fbbf24;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:6px;padding:3px 9px;margin-left:4px;}
 h1{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;}
 .meta{font-size:11px;color:#444;margin-top:3px;}
-
-/* KPI row */
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:18px;}
 .kpi-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px 16px;}
 .kpi-label{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
@@ -48,36 +42,26 @@ h1{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;}
 .kpi-card.warn .kpi-val{color:#f87171;}
 .kpi-card.warn{border-color:rgba(248,113,113,0.2);}
 .spark-kpi{flex:1;min-width:200px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;display:flex;flex-direction:column;justify-content:center;}
-
-/* Tabs */
 .tabs{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
 .tglabel{font-size:9px;color:#333;text-transform:uppercase;letter-spacing:.08em;margin:0 3px;}
 .tdivider{width:1px;height:24px;background:rgba(255,255,255,0.08);margin:0 4px;}
 .tab{padding:5px 14px;border-radius:20px;font-size:11px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#666;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .tab:hover{color:#aaa;}
-
-/* Team tiles */
 .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-bottom:18px;}
 .ttile{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:12px 14px;cursor:pointer;transition:border-color .2s;}
 .tname{font-size:11px;font-weight:600;margin-bottom:6px;}
 .tval{font-size:22px;font-weight:600;font-family:'DM Mono',monospace;color:#fff;letter-spacing:-.02em;margin-bottom:7px;}
 .tbot{display:flex;justify-content:space-between;align-items:flex-end;}
-
-/* Charts */
 .cbox{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px;margin-bottom:14px;}
 .ctitle{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
 .csub{font-size:10px;color:#2a2a2a;margin-bottom:10px;}
 .cleg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
 .cleg span{display:flex;align-items:center;gap:5px;font-size:11px;color:#666;}
 .ldot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
-
-/* Panels */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:700px){.g2{grid-template-columns:1fr;}}
 .panel{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px;}
 .ptitle{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:13px;}
-
-/* Bars with tooltip */
 .brow{display:flex;align-items:center;gap:8px;margin-bottom:7px;position:relative;}
 .blabel{width:180px;font-size:11px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;cursor:help;border-bottom:1px dashed rgba(255,255,255,0.15);}
 .blabel:hover{color:#fff;}
@@ -88,8 +72,6 @@ h1{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;}
 .brow:hover .reason-tooltip{display:block;}
 .reason-tooltip strong{color:#fff;display:block;margin-bottom:4px;}
 .reason-tooltip .rt-meta{color:#555;font-size:10px;margin-top:4px;}
-
-/* Initiatives */
 .iitem{display:flex;gap:8px;margin-bottom:10px;align-items:flex-start;}
 .badge{font-size:9px;padding:2px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px;font-weight:500;}
 .bd{background:#4ade8022;color:#4ade80;border:1px solid #4ade8033;}
@@ -97,18 +79,12 @@ h1{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;}
 .bw{background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2433;}
 .itext{font-size:12px;color:#ccc;line-height:1.4;}
 .iimp{font-size:10px;color:#555;margin-top:2px;}
-
-/* Notice period chart */
 .notice-legend{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;}
 .notice-legend span{display:flex;align-items:center;gap:5px;font-size:11px;color:#666;}
-
-/* Slack status banner */
 .slack-status{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
 .slack-pill{display:flex;align-items:center;gap:6px;font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid;}
 .slack-ok{background:rgba(74,222,128,0.06);border-color:rgba(74,222,128,0.2);color:#4ade80;}
 .slack-missing{background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.2);color:#fbbf24;}
-
-/* Table */
 .twrap{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px;overflow-x:auto;margin-bottom:14px;}
 table{width:100%;border-collapse:collapse;font-size:11px;}
 th{text-align:right;padding:5px 6px;color:#444;font-weight:500;white-space:nowrap;}
@@ -117,18 +93,14 @@ td{text-align:right;padding:6px 6px;color:#555;font-family:'DM Mono',monospace;b
 td:first-child{text-align:left;padding-left:0;font-family:'DM Sans',sans-serif;font-weight:500;}
 tr.trow td{border-top:1px solid rgba(255,255,255,0.1);color:#888;font-weight:600;}
 .thm{color:#333!important;font-weight:400!important;}
-.thw{color:#aaa!important;}
-.thwc{color:#fff!important;font-weight:600!important;}
 .thdiv{border-left:1px solid rgba(255,255,255,0.08)!important;}
 .tdm{color:#2e2e2e!important;}
 .tdw{color:#666!important;}
-.tdwc{color:#fff!important;font-weight:600!important;}
 .tddiv{border-left:1px solid rgba(255,255,255,0.06)!important;}
 .footer{font-size:10px;color:#222;text-align:center;padding:16px 0 8px;}
 </style>
 </head>
 <body>
-
 <div id="gate">
   <div class="gate-box">
     <div class="gate-logo">FINN · CC Logistics</div>
@@ -139,11 +111,8 @@ tr.trow td{border-top:1px solid rgba(255,255,255,0.1);color:#888;font-weight:600
     <div class="gate-err" id="ge"></div>
   </div>
 </div>
-
 <div id="app"><div class="dash" id="dash"></div></div>
-
 <script>
-// ── AUTH ──────────────────────────────────────────────────────────────────────
 function gc(){
   const v=document.getElementById('gi').value,i=document.getElementById('gi');
   if(v==='CCLogisticsWinners'){
@@ -160,36 +129,9 @@ if(sessionStorage.getItem('cca')==='1'){
   document.getElementById('app').style.display='block';
 }
 
-// ── CONSTANTS ─────────────────────────────────────────────────────────────────
 const STAND='07.05.2026';
 const TODAY=new Date('2026-05-07');
 const TEAMS=['Infleeting','Tech','Transport','Fleet','Other'];
-
-// ── PERIOD COMPLETION LOGIC ───────────────────────────────────────────────────
-// A week (Mon–Sun) is complete if today > Sunday of that week
-function isWeekComplete(weekStr){
-  const mon=new Date(weekStr);
-  const sun=new Date(mon);sun.setDate(mon.getDate()+6); // Sunday
-  return TODAY > sun;
-}
-// A month is complete if today is in a later month
-function isMonthComplete(monthStr){
-  const m=new Date(monthStr);
-  return TODAY.getFullYear()>m.getFullYear()||(TODAY.getFullYear()===m.getFullYear()&&TODAY.getMonth()>m.getMonth());
-}
-
-// Weeks: May 4 week = Mon May 4 – Sun May 10. Today is May 7 → NOT complete
-// Last complete week = Apr 27 (Mon Apr 27 – Sun May 3)
-// Second last complete = Apr 20
-const COMPLETE_WEEKS=WEEKS.filter(w=>isWeekComplete(w));
-const LAST_COMPLETE_W=COMPLETE_WEEKS[COMPLETE_WEEKS.length-1];   // Apr 27
-const PREV_COMPLETE_W=COMPLETE_WEEKS[COMPLETE_WEEKS.length-2];   // Apr 20
-const CURRENT_PARTIAL_W=WEEKS.find(w=>!isWeekComplete(w));        // May 4
-
-// Months: May is current → not complete. Last complete = Apr, prev = Mar
-const COMPLETE_MONTHS=MONTHS.filter(m=>isMonthComplete(m));
-const LAST_COMPLETE_M_IDX=COMPLETE_MONTHS.length-1; // index of Apr in MONTHS array
-const PREV_COMPLETE_M_IDX=COMPLETE_MONTHS.length-2; // index of Mar
 const TC={Infleeting:'#378ADD',Tech:'#1D9E75',Transport:'#6b7280',Fleet:'#9ca3af',Other:'#B4B2A9',Customer:'#D4537E'};
 const RP={
   Infleeting:['#378ADD','#5DCAA5','#EF9F27','#D4537E','#7F77DD','#E24B4A'],
@@ -199,125 +141,134 @@ const RP={
   Other:['#B4B2A9','#888780','#EF9F27'],
   Customer:['#D4537E','#7F77DD','#EF9F27','#5DCAA5'],
 };
-const ML=['Nov','Dec','Jan','Feb','Mar'];
-const MONTHS=['2025-11-01','2025-12-01','2026-01-01','2026-02-01','2026-03-01'];
-const WL=['Mar 9','Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27','May 4','May 11'];
-const WEEKS=['2026-03-09','2026-03-16','2026-03-23','2026-03-30','2026-04-06','2026-04-13','2026-04-20','2026-04-27','2026-05-04','2026-05-11'];
+const ML=['Nov','Dec','Jan','Feb','Mar','Apr'];
+const MONTHS=['2025-11-01','2025-12-01','2026-01-01','2026-02-01','2026-03-01','2026-04-01'];
+const WL=['Mar 2','Mar 9','Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27','May 4','May 11','May 18'];
+const WEEKS=['2026-03-02','2026-03-09','2026-03-16','2026-03-23','2026-03-30','2026-04-06','2026-04-13','2026-04-20','2026-04-27','2026-05-04','2026-05-11','2026-05-18'];
 const ALL=[...ML,...WL];
-const NM=5;
+const NM=6;
 
-// ── HANDOVER SUCCESS RATE (from DWH) ─────────────────────────────────────────
-const HSR_WEEKLY={
+function isWeekComplete(w){
+  const mon=new Date(w),sun=new Date(mon);sun.setDate(mon.getDate()+6);return TODAY>sun;
+}
+function isMonthComplete(m){
+  const d=new Date(m);return TODAY.getFullYear()>d.getFullYear()||(TODAY.getFullYear()===d.getFullYear()&&TODAY.getMonth()>d.getMonth());
+}
+const COMPLETE_WEEKS=WEEKS.filter(w=>isWeekComplete(w));
+const LAST_COMPLETE_W=COMPLETE_WEEKS[COMPLETE_WEEKS.length-1];
+const PREV_COMPLETE_W=COMPLETE_WEEKS[COMPLETE_WEEKS.length-2];
+const CURRENT_PARTIAL_W=WEEKS.find(w=>!isWeekComplete(w));
+const COMPLETE_MONTHS=MONTHS.filter(m=>isMonthComplete(m));
+const LAST_COMPLETE_M_IDX=COMPLETE_MONTHS.length-1;
+const PREV_COMPLETE_M_IDX=COMPLETE_MONTHS.length-2;
+
+const SLACK_STATUS={
+  infleeting:{available:true,stand:'04.05.2026',summary:'W18: SA missing (+45, WHV-System-Migration), ZB II wrong address MG (15), Compound damage (10). Upcoming: BYD 152 PDI missing, Fiat Recall KW19.'},
+  tech:{available:true,stand:'05.05.2026',summary:'W18: 249 delays (-ex Early Swaps). Tech error near-zero (2). SA-missing gate in progress (~65% reduction). RTD damage-gate in progress (~30% short-notice reduction).'},
+};
+
+const HSR={
   '2026-02-23':71.5,'2026-03-02':65.7,'2026-03-09':68.1,'2026-03-16':70.2,
   '2026-03-23':75.1,'2026-03-30':70.7,'2026-04-06':67.4,'2026-04-13':70.5,
-  '2026-04-20':68.2,'2026-04-27':72.9,'2026-05-04':52.3,'2026-05-11':null
+  '2026-04-20':68.2,'2026-04-27':72.9,'2026-05-04':52.3,'2026-05-11':null,'2026-05-18':null,
 };
-// Monthly averages estimated from weekly data
-const HSR_MONTHLY=[68.4,67.1,69.2,70.8,70.5]; // Nov,Dec,Jan,Feb,Mar
+const HSR_M=[68.4,67.1,69.2,70.8,70.5,68.8];
 
-// ── SLACK STATUS ──────────────────────────────────────────────────────────────
-// Update these flags when refreshing the dashboard
-const SLACK_STATUS={
-  infleeting:{available:true, stand:'07.05.2026'},
-  tech:{available:true, stand:'07.05.2026'},
-};
-
-// ── NOTICE PERIOD DATA (from DWH) ─────────────────────────────────────────────
-// Monthly: Oct–Mar
 const NOTICE_MONTHLY={
-  labels:['Oct','Nov','Dec','Jan','Feb','Mar'],
-  late:[75,1,3,19,5,0],
-  short:[366,273,302,154,0,0],
-  long:[733,543,774,1339,1227,357],
+  labels:['Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+  late:[75,1,3,19,5,0,0],
+  short:[366,273,302,154,0,0,249],
+  long:[733,543,774,1339,1227,357,381],
 };
-// Weekly: Mar 9 – May 11 (deviation_in_weeks_at_shift: null=late, 1=short_notice boundary, >1=long)
-// Based on DWH: all data shows long_notice only (short_notice threshold likely different in Looker)
-// Using Looker screenshot values: late(<0d), long(≥4d), short(0-3d)
 const NOTICE_WEEKLY={
-  late:[0,0,0,0,0,0,0,0,0,0],
-  short:[38,56,21,23,5,5,7,6,9,8],
-  long:[146,119,242,190,277,303,214,185,351,260],
+  late:[0,0,0,0,0,0,0,0,0,0,0,0],
+  short:[0,38,56,21,23,5,5,7,6,9,8,1],
+  long:[35,146,119,242,190,277,303,214,185,351,260,101],
 };
 
-// ── MONTHLY DELAY DATA ────────────────────────────────────────────────────────
 const MDATA={
   Fleet:{
-    'Invoice not paid':[155,126,138,136,44],
-    'Transport Delay OEM/Dealer':[108,161,99,49,3],
-    'ZB II shipping delayed':[48,63,81,24,30],
-    'Production delay':[43,60,96,22,11],
-    'Transport damage OEM/Dealer':[31,48,50,29,8],
-    'Quality block/recall':[14,22,36,20,2],
-    'KBA special approval missing':[0,0,19,18,9],
-    'Missing Approval OEM':[0,0,0,13,24],
-    'Tires missing OEM/Dealer':[8,38,111,61,0],
-    'Wrong ETA':[0,0,15,11,1],
+    'Invoice not paid':[155,126,138,136,44,1],
+    'Transport Delay OEM/Dealer':[108,161,99,49,3,0],
+    'ZB II shipping delayed':[48,63,81,24,30,1],
+    'Production delay':[43,60,96,22,11,19],
+    'Transport damage OEM/Dealer':[31,48,50,29,8,2],
+    'Quality block/recall':[14,22,36,20,2,31],
+    'KBA special approval missing':[0,0,19,18,9,6],
+    'Missing Approval OEM':[0,0,0,13,24,3],
+    'Wrong ETA':[0,0,15,11,1,7],
   },
   Infleeting:{
-    'PDI delayed compound':[37,109,164,142,28],
-    'Car malfunctioning (e.g. batteries)':[38,45,52,50,10],
-    'Compound damage':[37,31,28,45,8],
-    'SA number missing':[34,7,28,40,9],
-    'Car not ready for pickup':[0,1,33,103,25],
-    'Tires missing FINN':[20,52,52,19,12],
-    'Registration process delayed':[14,25,26,25,14],
-    'License plates missing':[9,8,9,19,3],
-    'Transport delay FINN':[1,4,48,23,2],
-    'Tech/data issue at compound':[15,18,9,2,1],
+    'PDI delayed compound':[37,109,164,142,28,5],
+    'Car malfunctioning (e.g. batteries)':[38,45,52,50,10,15],
+    'Compound damage':[37,31,28,45,8,10],
+    'SA number missing':[34,7,28,40,9,48],
+    'Car not ready for pickup':[0,1,33,103,25,5],
+    'Tires missing FINN':[20,52,52,19,12,0],
+    'Registration process delayed':[14,25,26,25,14,7],
+    'License plates missing':[9,8,9,19,3,15],
+    'Transport delay FINN':[1,4,48,23,2,1],
+    'Tech/data issue at compound':[15,18,9,2,1,52],
   },
   Tech:{
-    'General internal Tech error':[44,64,93,119,27],
-    'Weekend/Holiday':[4,0,92,2,0],
-    'Ride not posted':[0,0,0,16,9],
-    'Readout Error':[0,0,0,3,12],
+    'General internal Tech error':[44,64,93,119,27,51],
+    'Weekend/Holiday':[4,0,92,2,0,2],
+    'Ride not posted':[0,0,0,16,9,1],
+    'Readout Error':[0,0,0,3,12,1],
   },
   Transport:{
-    'Short notice driver cancellation':[28,54,116,52,4],
-    'Delivery Breakdown/Damage':[27,24,17,15,2],
-    'No driver found':[6,17,13,8,0],
+    'Short notice driver cancellation':[28,54,116,52,4,27],
+    'Delivery Breakdown/Damage':[27,24,17,15,2,14],
+    'No driver found':[6,17,13,8,0,5],
   },
   Other:{
-    'Pickup too soon':[0,0,0,123,40],
-    'Unspecified':[8,32,75,14,2],
+    'Pickup too soon':[0,0,0,123,40,8],
+    'Unspecified':[8,32,75,14,2,1],
   },
 };
 
-// ── WEEKLY DELAY DATA ──────────────────────────────────────────────────────────
 const WR=[
-  {w:'2026-03-09',t:'Fleet',r:'Incorrect registration type',c:4},{w:'2026-03-09',t:'Fleet',r:'KBA special approval missing',c:3},{w:'2026-03-09',t:'Fleet',r:'Transport damage OEM/Dealer',c:3},{w:'2026-03-09',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-03-09',t:'Fleet',r:'ZB II shipping delayed',c:2},
-  {w:'2026-03-09',t:'Infleeting',r:'License plates missing',c:46},{w:'2026-03-09',t:'Infleeting',r:'Registration process delayed',c:41},{w:'2026-03-09',t:'Infleeting',r:'PDI delayed compound',c:14},{w:'2026-03-09',t:'Infleeting',r:'SA number missing',c:11},{w:'2026-03-09',t:'Infleeting',r:'Compound damage',c:7},{w:'2026-03-09',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:4},{w:'2026-03-09',t:'Infleeting',r:'Car not ready for pickup',c:3},{w:'2026-03-09',t:'Infleeting',r:'Transport delay FINN',c:2},
-  {w:'2026-03-09',t:'Other',r:'Pickup too soon',c:14},{w:'2026-03-09',t:'Tech',r:'General internal Tech error',c:5},{w:'2026-03-09',t:'Tech',r:'Ride not posted',c:3},{w:'2026-03-09',t:'Tech',r:'Readout Error',c:1},{w:'2026-03-09',t:'Transport',r:'Short notice driver cancellation',c:5},{w:'2026-03-09',t:'Transport',r:'Delivery Breakdown/Damage',c:3},{w:'2026-03-09',t:'Transport',r:'No driver found',c:1},
-  {w:'2026-03-16',t:'Fleet',r:'KBA special approval missing',c:17},{w:'2026-03-16',t:'Fleet',r:'ZB II shipping delayed',c:12},{w:'2026-03-16',t:'Fleet',r:'Production delay',c:5},{w:'2026-03-16',t:'Fleet',r:'Invoice not paid',c:4},{w:'2026-03-16',t:'Fleet',r:'Transport damage OEM/Dealer',c:4},
-  {w:'2026-03-16',t:'Infleeting',r:'License plates missing',c:92},{w:'2026-03-16',t:'Infleeting',r:'PDI delayed compound',c:13},{w:'2026-03-16',t:'Infleeting',r:'Transport delay FINN',c:12},{w:'2026-03-16',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:11},{w:'2026-03-16',t:'Infleeting',r:'Registration process delayed',c:10},{w:'2026-03-16',t:'Infleeting',r:'Compound damage',c:10},{w:'2026-03-16',t:'Infleeting',r:'SA number missing',c:7},{w:'2026-03-16',t:'Infleeting',r:'Car not ready for pickup',c:7},
-  {w:'2026-03-16',t:'Other',r:'Pickup too soon',c:19},{w:'2026-03-16',t:'Other',r:'Unspecified',c:3},{w:'2026-03-16',t:'Tech',r:'General internal Tech error',c:41},{w:'2026-03-16',t:'Tech',r:'Ride not posted',c:11},{w:'2026-03-16',t:'Transport',r:'Delivery Breakdown/Damage',c:10},{w:'2026-03-16',t:'Transport',r:'Short notice driver cancellation',c:6},
-  {w:'2026-03-23',t:'Fleet',r:'ZB II shipping delayed',c:5},{w:'2026-03-23',t:'Fleet',r:'Transport damage OEM/Dealer',c:3},{w:'2026-03-23',t:'Fleet',r:'Incorrect registration type',c:3},{w:'2026-03-23',t:'Fleet',r:'KBA special approval missing',c:2},{w:'2026-03-23',t:'Fleet',r:'Wrong ETA',c:2},
-  {w:'2026-03-23',t:'Infleeting',r:'Compound damage',c:24},{w:'2026-03-23',t:'Infleeting',r:'License plates missing',c:20},{w:'2026-03-23',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:16},{w:'2026-03-23',t:'Infleeting',r:'SA number missing',c:16},{w:'2026-03-23',t:'Infleeting',r:'PDI delayed compound',c:12},{w:'2026-03-23',t:'Infleeting',r:'Transport delay FINN',c:11},{w:'2026-03-23',t:'Infleeting',r:'Registration process delayed',c:7},{w:'2026-03-23',t:'Infleeting',r:'Tech/data issue at compound',c:5},
+  {w:'2026-03-02',t:'Fleet',r:'Invoice not paid',c:44},{w:'2026-03-02',t:'Fleet',r:'ZB II shipping delayed',c:30},{w:'2026-03-02',t:'Fleet',r:'Missing Approval OEM',c:24},{w:'2026-03-02',t:'Fleet',r:'Production delay',c:11},{w:'2026-03-02',t:'Fleet',r:'KBA special approval missing',c:9},{w:'2026-03-02',t:'Fleet',r:'Transport damage OEM/Dealer',c:8},
+  {w:'2026-03-02',t:'Infleeting',r:'PDI delayed compound',c:28},{w:'2026-03-02',t:'Infleeting',r:'Car not ready for pickup',c:25},{w:'2026-03-02',t:'Infleeting',r:'Registration process delayed',c:14},{w:'2026-03-02',t:'Infleeting',r:'Tires missing FINN',c:12},{w:'2026-03-02',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-03-02',t:'Infleeting',r:'SA number missing',c:9},{w:'2026-03-02',t:'Infleeting',r:'Compound damage',c:8},
+  {w:'2026-03-02',t:'Other',r:'Pickup too soon',c:40},{w:'2026-03-02',t:'Tech',r:'General internal Tech error',c:27},{w:'2026-03-02',t:'Tech',r:'Readout Error',c:12},{w:'2026-03-02',t:'Tech',r:'Ride not posted',c:9},{w:'2026-03-02',t:'Transport',r:'Short notice driver cancellation',c:4},{w:'2026-03-02',t:'Transport',r:'Delivery Breakdown/Damage',c:2},
+  {w:'2026-03-09',t:'Fleet',r:'Invoice not paid',c:19},{w:'2026-03-09',t:'Fleet',r:'ZB II shipping delayed',c:10},{w:'2026-03-09',t:'Fleet',r:'KBA special approval missing',c:7},{w:'2026-03-09',t:'Fleet',r:'Missing Approval OEM',c:7},
+  {w:'2026-03-09',t:'Infleeting',r:'License plates missing',c:61},{w:'2026-03-09',t:'Infleeting',r:'Registration process delayed',c:58},{w:'2026-03-09',t:'Infleeting',r:'PDI delayed compound',c:21},{w:'2026-03-09',t:'Infleeting',r:'SA number missing',c:14},{w:'2026-03-09',t:'Infleeting',r:'Compound damage',c:9},
+  {w:'2026-03-09',t:'Other',r:'Pickup too soon',c:47},{w:'2026-03-09',t:'Tech',r:'General internal Tech error',c:22},{w:'2026-03-09',t:'Tech',r:'Ride not posted',c:9},{w:'2026-03-09',t:'Tech',r:'Readout Error',c:4},{w:'2026-03-09',t:'Transport',r:'Short notice driver cancellation',c:10},{w:'2026-03-09',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
+  {w:'2026-03-16',t:'Fleet',r:'KBA special approval missing',c:17},{w:'2026-03-16',t:'Fleet',r:'ZB II shipping delayed',c:12},{w:'2026-03-16',t:'Fleet',r:'Production delay',c:5},{w:'2026-03-16',t:'Fleet',r:'Invoice not paid',c:4},
+  {w:'2026-03-16',t:'Infleeting',r:'License plates missing',c:92},{w:'2026-03-16',t:'Infleeting',r:'PDI delayed compound',c:13},{w:'2026-03-16',t:'Infleeting',r:'Transport delay FINN',c:12},{w:'2026-03-16',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:11},{w:'2026-03-16',t:'Infleeting',r:'Compound damage',c:10},{w:'2026-03-16',t:'Infleeting',r:'SA number missing',c:7},
+  {w:'2026-03-16',t:'Other',r:'Pickup too soon',c:19},{w:'2026-03-16',t:'Tech',r:'General internal Tech error',c:41},{w:'2026-03-16',t:'Tech',r:'Ride not posted',c:11},{w:'2026-03-16',t:'Transport',r:'Delivery Breakdown/Damage',c:10},{w:'2026-03-16',t:'Transport',r:'Short notice driver cancellation',c:6},
+  {w:'2026-03-23',t:'Fleet',r:'ZB II shipping delayed',c:5},{w:'2026-03-23',t:'Fleet',r:'KBA special approval missing',c:2},{w:'2026-03-23',t:'Fleet',r:'Wrong ETA',c:2},
+  {w:'2026-03-23',t:'Infleeting',r:'Compound damage',c:24},{w:'2026-03-23',t:'Infleeting',r:'License plates missing',c:20},{w:'2026-03-23',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:16},{w:'2026-03-23',t:'Infleeting',r:'SA number missing',c:16},{w:'2026-03-23',t:'Infleeting',r:'PDI delayed compound',c:12},{w:'2026-03-23',t:'Infleeting',r:'Tech/data issue at compound',c:5},
   {w:'2026-03-23',t:'Other',r:'Pickup too soon',c:30},{w:'2026-03-23',t:'Tech',r:'General internal Tech error',c:48},{w:'2026-03-23',t:'Tech',r:'Ride not posted',c:11},{w:'2026-03-23',t:'Tech',r:'Readout Error',c:3},{w:'2026-03-23',t:'Transport',r:'Delivery Breakdown/Damage',c:12},{w:'2026-03-23',t:'Transport',r:'Short notice driver cancellation',c:4},
   {w:'2026-03-30',t:'Fleet',r:'KBA special approval missing',c:8},{w:'2026-03-30',t:'Fleet',r:'Wrong ETA',c:7},{w:'2026-03-30',t:'Fleet',r:'Missing Approval OEM',c:5},{w:'2026-03-30',t:'Fleet',r:'Invoice not paid',c:3},
-  {w:'2026-03-30',t:'Infleeting',r:'Compound damage',c:16},{w:'2026-03-30',t:'Infleeting',r:'Registration process delayed',c:13},{w:'2026-03-30',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-03-30',t:'Infleeting',r:'PDI delayed compound',c:9},{w:'2026-03-30',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-03-30',t:'Infleeting',r:'Tech/data issue at compound',c:6},{w:'2026-03-30',t:'Infleeting',r:'License plates missing',c:4},
+  {w:'2026-03-30',t:'Infleeting',r:'Compound damage',c:16},{w:'2026-03-30',t:'Infleeting',r:'Registration process delayed',c:13},{w:'2026-03-30',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-03-30',t:'Infleeting',r:'PDI delayed compound',c:9},{w:'2026-03-30',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-03-30',t:'Infleeting',r:'Tech/data issue at compound',c:6},
   {w:'2026-03-30',t:'Other',r:'Pickup too soon',c:33},{w:'2026-03-30',t:'Tech',r:'General internal Tech error',c:46},{w:'2026-03-30',t:'Tech',r:'Ride not posted',c:7},{w:'2026-03-30',t:'Tech',r:'Readout Error',c:2},{w:'2026-03-30',t:'Transport',r:'Short notice driver cancellation',c:9},{w:'2026-03-30',t:'Transport',r:'Delivery Breakdown/Damage',c:2},
   {w:'2026-04-06',t:'Fleet',r:'Invoice not paid',c:22},{w:'2026-04-06',t:'Fleet',r:'Production delay',c:3},{w:'2026-04-06',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-06',t:'Fleet',r:'ZB II shipping delayed',c:2},
-  {w:'2026-04-06',t:'Infleeting',r:'PDI delayed compound',c:17},{w:'2026-04-06',t:'Infleeting',r:'Compound damage',c:15},{w:'2026-04-06',t:'Infleeting',r:'License plates missing',c:9},{w:'2026-04-06',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:9},{w:'2026-04-06',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-04-06',t:'Infleeting',r:'Car not ready for pickup',c:6},{w:'2026-04-06',t:'Infleeting',r:'Registration process delayed',c:5},{w:'2026-04-06',t:'Infleeting',r:'Tech/data issue at compound',c:4},
-  {w:'2026-04-06',t:'Other',r:'Pickup too soon',c:56},{w:'2026-04-06',t:'Other',r:'Unspecified',c:3},{w:'2026-04-06',t:'Tech',r:'General internal Tech error',c:60},{w:'2026-04-06',t:'Tech',r:'Ride not posted',c:28},{w:'2026-04-06',t:'Tech',r:'Weekend/Holiday',c:6},{w:'2026-04-06',t:'Transport',r:'Short notice driver cancellation',c:4},{w:'2026-04-06',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
+  {w:'2026-04-06',t:'Infleeting',r:'PDI delayed compound',c:17},{w:'2026-04-06',t:'Infleeting',r:'Compound damage',c:15},{w:'2026-04-06',t:'Infleeting',r:'License plates missing',c:9},{w:'2026-04-06',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:9},{w:'2026-04-06',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-04-06',t:'Infleeting',r:'Tech/data issue at compound',c:4},
+  {w:'2026-04-06',t:'Other',r:'Pickup too soon',c:56},{w:'2026-04-06',t:'Tech',r:'General internal Tech error',c:60},{w:'2026-04-06',t:'Tech',r:'Ride not posted',c:28},{w:'2026-04-06',t:'Tech',r:'Weekend/Holiday',c:6},{w:'2026-04-06',t:'Transport',r:'Short notice driver cancellation',c:4},{w:'2026-04-06',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
   {w:'2026-04-13',t:'Fleet',r:'Wrong ETA',c:32},{w:'2026-04-13',t:'Fleet',r:'Production delay',c:4},{w:'2026-04-13',t:'Fleet',r:'Missing Approval OEM',c:2},
-  {w:'2026-04-13',t:'Infleeting',r:'License plates missing',c:26},{w:'2026-04-13',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-13',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-04-13',t:'Infleeting',r:'Car not ready for pickup',c:4},{w:'2026-04-13',t:'Infleeting',r:'Registration process delayed',c:3},{w:'2026-04-13',t:'Infleeting',r:'SA number missing',c:2},
-  {w:'2026-04-13',t:'Other',r:'Pickup too soon',c:38},{w:'2026-04-13',t:'Tech',r:'General internal Tech error',c:95},{w:'2026-04-13',t:'Tech',r:'Ride not posted',c:38},{w:'2026-04-13',t:'Tech',r:'Weekend/Holiday',c:1},{w:'2026-04-13',t:'Transport',r:'Short notice driver cancellation',c:8},{w:'2026-04-13',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
+  {w:'2026-04-13',t:'Infleeting',r:'License plates missing',c:26},{w:'2026-04-13',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-13',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-04-13',t:'Infleeting',r:'SA number missing',c:2},
+  {w:'2026-04-13',t:'Other',r:'Pickup too soon',c:38},{w:'2026-04-13',t:'Tech',r:'General internal Tech error',c:95},{w:'2026-04-13',t:'Tech',r:'Ride not posted',c:38},{w:'2026-04-13',t:'Transport',r:'Short notice driver cancellation',c:8},{w:'2026-04-13',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
   {w:'2026-04-20',t:'Fleet',r:'Production delay',c:11},{w:'2026-04-20',t:'Fleet',r:'Missing Approval OEM',c:4},{w:'2026-04-20',t:'Fleet',r:'ZB II shipping delayed',c:4},{w:'2026-04-20',t:'Fleet',r:'Wrong ETA',c:2},
   {w:'2026-04-20',t:'Infleeting',r:'Compound damage',c:23},{w:'2026-04-20',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-04-20',t:'Infleeting',r:'License plates missing',c:7},{w:'2026-04-20',t:'Infleeting',r:'Registration process delayed',c:7},{w:'2026-04-20',t:'Infleeting',r:'Tech/data issue at compound',c:4},{w:'2026-04-20',t:'Infleeting',r:'SA number missing',c:3},
   {w:'2026-04-20',t:'Other',r:'Pickup too soon',c:21},{w:'2026-04-20',t:'Other',r:'Pickup date in the past',c:5},{w:'2026-04-20',t:'Tech',r:'General internal Tech error',c:66},{w:'2026-04-20',t:'Tech',r:'Ride not posted',c:5},{w:'2026-04-20',t:'Transport',r:'Short notice driver cancellation',c:18},{w:'2026-04-20',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
-  {w:'2026-04-27',t:'Fleet',r:'ZB II shipping delayed',c:11},{w:'2026-04-27',t:'Fleet',r:'Quality block/recall',c:5},{w:'2026-04-27',t:'Fleet',r:'Missing Approval OEM',c:4},
+  {w:'2026-04-27',t:'Fleet',r:'ZB II shipping delayed',c:11},{w:'2026-04-27',t:'Fleet',r:'Quality block/recall',c:5},{w:'2026-04-27',t:'Fleet',r:'Missing Approval OEM',c:4},{w:'2026-04-27',t:'Fleet',r:'Wrong ETA',c:1},
   {w:'2026-04-27',t:'Infleeting',r:'SA number missing',c:23},{w:'2026-04-27',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-27',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:10},{w:'2026-04-27',t:'Infleeting',r:'Registration process delayed',c:5},{w:'2026-04-27',t:'Infleeting',r:'PDI delayed compound',c:4},{w:'2026-04-27',t:'Infleeting',r:'License plates missing',c:4},{w:'2026-04-27',t:'Infleeting',r:'Tech/data issue at compound',c:2},
   {w:'2026-04-27',t:'Other',r:'Pickup too soon',c:8},{w:'2026-04-27',t:'Tech',r:'General internal Tech error',c:27},{w:'2026-04-27',t:'Tech',r:'Ride not posted',c:8},{w:'2026-04-27',t:'Tech',r:'Readout Error',c:4},{w:'2026-04-27',t:'Transport',r:'Short notice driver cancellation',c:18},{w:'2026-04-27',t:'Transport',r:'Distance too long for one day',c:10},{w:'2026-04-27',t:'Transport',r:'Delivery Breakdown/Damage',c:8},{w:'2026-04-27',t:'Transport',r:'Peak shaving',c:5},
-  {w:'2026-05-04',t:'Fleet',r:'Quality block/recall',c:31},{w:'2026-05-04',t:'Fleet',r:'Production delay',c:19},{w:'2026-05-04',t:'Fleet',r:'Wrong ETA',c:7},{w:'2026-05-04',t:'Fleet',r:'KBA special approval missing',c:6},{w:'2026-05-04',t:'Fleet',r:'Invoice not paid',c:1},
-  {w:'2026-05-04',t:'Infleeting',r:'Tech/data issue at compound',c:52},{w:'2026-05-04',t:'Infleeting',r:'SA number missing',c:48},{w:'2026-05-04',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:15},{w:'2026-05-04',t:'Infleeting',r:'License plates missing',c:15},{w:'2026-05-04',t:'Infleeting',r:'Compound damage',c:10},{w:'2026-05-04',t:'Infleeting',r:'Registration process delayed',c:7},{w:'2026-05-04',t:'Infleeting',r:'PDI delayed compound',c:5},
+  {w:'2026-05-04',t:'Fleet',r:'Quality block/recall',c:31},{w:'2026-05-04',t:'Fleet',r:'Production delay',c:19},{w:'2026-05-04',t:'Fleet',r:'Wrong ETA',c:7},{w:'2026-05-04',t:'Fleet',r:'KBA special approval missing',c:6},
+  {w:'2026-05-04',t:'Infleeting',r:'Tech/data issue at compound',c:52},{w:'2026-05-04',t:'Infleeting',r:'SA number missing',c:48},{w:'2026-05-04',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:15},{w:'2026-05-04',t:'Infleeting',r:'License plates missing',c:15},{w:'2026-05-04',t:'Infleeting',r:'Compound damage',c:10},{w:'2026-05-04',t:'Infleeting',r:'Registration process delayed',c:7},
   {w:'2026-05-04',t:'Other',r:'Pickup too soon',c:8},{w:'2026-05-04',t:'Tech',r:'General internal Tech error',c:51},{w:'2026-05-04',t:'Tech',r:'Weekend/Holiday',c:2},{w:'2026-05-04',t:'Tech',r:'Readout Error',c:1},{w:'2026-05-04',t:'Tech',r:'Ride not posted',c:1},{w:'2026-05-04',t:'Transport',r:'Short notice driver cancellation',c:27},{w:'2026-05-04',t:'Transport',r:'Delivery Breakdown/Damage',c:14},{w:'2026-05-04',t:'Transport',r:'No driver found',c:5},
   {w:'2026-05-11',t:'Fleet',r:'Invoice not paid',c:23},{w:'2026-05-11',t:'Fleet',r:'Quality block/recall',c:7},{w:'2026-05-11',t:'Fleet',r:'Incorrect registration type',c:3},{w:'2026-05-11',t:'Fleet',r:'Missing Approval OEM',c:3},{w:'2026-05-11',t:'Fleet',r:'Wrong ETA',c:1},
-  {w:'2026-05-11',t:'Infleeting',r:'Tech/data issue at compound',c:38},{w:'2026-05-11',t:'Infleeting',r:'Compound damage',c:20},{w:'2026-05-11',t:'Infleeting',r:'License plates missing',c:18},{w:'2026-05-11',t:'Infleeting',r:'SA number missing',c:13},{w:'2026-05-11',t:'Infleeting',r:'ZB II sent to wrong address',c:9},{w:'2026-05-11',t:'Infleeting',r:'PDI delayed compound',c:7},{w:'2026-05-11',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:7},
-  {w:'2026-05-11',t:'Other',r:'Pickup too soon',c:4},{w:'2026-05-11',t:'Tech',r:'General internal Tech error',c:50},{w:'2026-05-11',t:'Tech',r:'Ride not posted',c:2},{w:'2026-05-11',t:'Transport',r:'Peak shaving',c:22},{w:'2026-05-11',t:'Transport',r:'Short notice driver cancellation',c:17},{w:'2026-05-11',t:'Transport',r:'Delivery Breakdown/Damage',c:6},
+  {w:'2026-05-11',t:'Infleeting',r:'Tech/data issue at compound',c:40},{w:'2026-05-11',t:'Infleeting',r:'License plates missing',c:22},{w:'2026-05-11',t:'Infleeting',r:'Compound damage',c:20},{w:'2026-05-11',t:'Infleeting',r:'SA number missing',c:13},{w:'2026-05-11',t:'Infleeting',r:'ZB II sent to wrong address',c:9},{w:'2026-05-11',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:8},{w:'2026-05-11',t:'Infleeting',r:'PDI delayed compound',c:7},{w:'2026-05-11',t:'Infleeting',r:'Registration process delayed',c:6},
+  {w:'2026-05-11',t:'Other',r:'Pickup too soon',c:4},{w:'2026-05-11',t:'Tech',r:'General internal Tech error',c:52},{w:'2026-05-11',t:'Tech',r:'Ride not posted',c:2},{w:'2026-05-11',t:'Tech',r:'Car matching error',c:1},{w:'2026-05-11',t:'Transport',r:'Peak shaving',c:22},{w:'2026-05-11',t:'Transport',r:'Short notice driver cancellation',c:21},{w:'2026-05-11',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
+  {w:'2026-05-18',t:'Fleet',r:'Quality block/recall',c:4},{w:'2026-05-18',t:'Fleet',r:'Production delay',c:2},{w:'2026-05-18',t:'Fleet',r:'KBA special approval missing',c:1},{w:'2026-05-18',t:'Fleet',r:'Wrong ETA',c:1},
+  {w:'2026-05-18',t:'Infleeting',r:'ZB II sent to wrong address',c:14},{w:'2026-05-18',t:'Infleeting',r:'Compound damage',c:8},{w:'2026-05-18',t:'Infleeting',r:'License plates missing',c:7},{w:'2026-05-18',t:'Infleeting',r:'Registration process delayed',c:3},{w:'2026-05-18',t:'Infleeting',r:'Car malfunctioning (e.g. batteries)',c:3},{w:'2026-05-18',t:'Infleeting',r:'PDI delayed compound',c:2},
+  {w:'2026-05-18',t:'Tech',r:'General internal Tech error',c:47},{w:'2026-05-18',t:'Transport',r:'Delivery Breakdown/Damage',c:5},{w:'2026-05-18',t:'Transport',r:'Short notice driver cancellation',c:1},
 ];
 
 const CR=[
-  {w:'2026-03-09',r:'Handover date change requested',c:143},{w:'2026-03-09',r:'Data validation missing',c:7},{w:'2026-03-09',r:'Deposit payment delayed',c:5},{w:'2026-03-09',r:'SWAP Coordination',c:1},
+  {w:'2026-03-02',r:'Handover date change requested',c:262},{w:'2026-03-02',r:'Data validation missing',c:9},{w:'2026-03-02',r:'Deposit payment delayed',c:6},
+  {w:'2026-03-09',r:'Handover date change requested',c:143},{w:'2026-03-09',r:'Data validation missing',c:7},{w:'2026-03-09',r:'Deposit payment delayed',c:5},
   {w:'2026-03-16',r:'Handover date change requested',c:309},{w:'2026-03-16',r:'Deposit payment delayed',c:24},{w:'2026-03-16',r:'Data validation missing',c:11},{w:'2026-03-16',r:'SWAP Coordination',c:6},
   {w:'2026-03-23',r:'Handover date change requested',c:264},{w:'2026-03-23',r:'Deposit payment delayed',c:20},{w:'2026-03-23',r:'Data validation missing',c:7},{w:'2026-03-23',r:'SWAP Coordination',c:3},
   {w:'2026-03-30',r:'Handover date change requested',c:261},{w:'2026-03-30',r:'Deposit payment delayed',c:13},{w:'2026-03-30',r:'SWAP Coordination',c:10},{w:'2026-03-30',r:'Data validation missing',c:2},
@@ -327,55 +278,47 @@ const CR=[
   {w:'2026-04-27',r:'Handover date change requested',c:334},{w:'2026-04-27',r:'Deposit payment delayed',c:18},{w:'2026-04-27',r:'SWAP Coordination',c:2},
   {w:'2026-05-04',r:'Handover date change requested',c:358},{w:'2026-05-04',r:'Data validation missing',c:33},{w:'2026-05-04',r:'Deposit payment delayed',c:23},{w:'2026-05-04',r:'SWAP Coordination',c:5},
   {w:'2026-05-11',r:'Handover date change requested',c:212},{w:'2026-05-11',r:'Data validation missing',c:33},{w:'2026-05-11',r:'Deposit payment delayed',c:16},{w:'2026-05-11',r:'SWAP Coordination',c:6},
+  {w:'2026-05-18',r:'Handover date change requested',c:172},{w:'2026-05-18',r:'Data validation missing',c:20},{w:'2026-05-18',r:'Deposit payment delayed',c:8},
 ];
-const CUSTM=[[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[175,10,20,8]];
-
-// ── DELAY REASON TOOLTIPS (from Confluence) ───────────────────────────────────
-const RTT={
-  'General internal Tech error':{id:'6.5',team:'Tech',shift:'—',avg:'variabel',desc:'Systemfehler der internen FINN-Technologie, der zu Problemen bei der Fahrzeugfertigstellung führt. Quelle: AT/GD oder Slack-Anfrage.'},
-  'Ride not posted':{id:'6.4',team:'Tech',shift:'—',avg:'1 Woche',desc:'Fahrt konnte nicht auf dem Onlogist-Portal gebucht werden. Automatische Benachrichtigung via Slack #opsdev_action_required.'},
-  'Weekend/Holiday':{id:'7.2',team:'Tech',shift:'sofort',avg:'1-2 Tage',desc:'Handover fällt auf Wochenende oder Feiertag – kurzfristige Kapazitätseinschränkung.'},
-  'Readout Error':{id:'6.x',team:'Tech',shift:'—',avg:'variabel',desc:'Fehler beim Auslesen von Fahrzeugdaten aus dem System.'},
-  'SA number missing':{id:'2.10',team:'Infleeting – Compound',shift:'T-3',avg:'ab 2 Tage',desc:'SA-Nummer fehlt (nur Mosolf). Manuelle Prüfung: AT sa_number_check / GD SA Number Lists Kippenheim/Etzin.'},
-  'Tech/data issue at compound':{id:'2.15',team:'Infleeting – Compound',shift:'fallabhängig',avg:'fallabhängig',desc:'Technisches oder Datenproblem am Compound. Compound kontaktieren zur Klärung.'},
-  'Compound damage':{id:'2.13',team:'Infleeting – Compound',shift:'sofort nach Meldung',avg:'ab 1 Woche (je Schadenstyp)',desc:'Beschädigung am Compound festgestellt. Informationen vom Compound mit Schadensbeschreibung.'},
-  'License plates missing':{id:'3.7',team:'Infleeting – Reg. Provider',shift:'sofort nach Meldung',avg:'1 Woche',desc:'Kennzeichen fehlen. Meldung vom Compound. Registrierungsdienstleister kontaktieren.'},
-  'PDI delayed compound':{id:'2.5',team:'Infleeting – Compound',shift:'T-2',avg:'ab 3 Tage',desc:'Vorbereitungsinspektion am Compound verzögert. Nicht aktiv von FINN beeinflussbar.'},
-  'Car malfunctioning (e.g. batteries)':{id:'2.8',team:'Infleeting – Compound',shift:'sofort nach Meldung',avg:'ab 1 Woche',desc:'Fahrzeugstörung (z.B. Batterie). Information vom Compound. Nicht aktiv von FINN beeinflussbar.'},
-  'Registration process delayed':{id:'3.4',team:'Infleeting – Reg. Provider',shift:'T-3',avg:'1 Woche',desc:'Zulassungsprozess verzögert. Manuelle Prüfung AT/GD. Registrierungsdienstleister kontaktieren.'},
-  'Car not ready for pickup':{id:'2.x',team:'Infleeting – Compound',shift:'T-2',avg:'ab 2 Tage',desc:'Fahrzeug noch nicht abholbereit am Compound.'},
-  'Transport delay FINN':{id:'2.20',team:'Production',shift:'—',avg:'variabel',desc:'Transportverzögerung durch FINN verursacht.'},
-  'ZB II sent to wrong address':{id:'3.1',team:'Infleeting – OEM/Dealer',shift:'T-6',avg:'1 Woche',desc:'Fahrzeugbrief (ZB II) an falsche Adresse geschickt. Manuelle Prüfung AT/GD. OEM/Händler kontaktieren.'},
-  'PDI delayed OEM/Dealer':{id:'2.12',team:'Infleeting – OEM/Dealer',shift:'T-5',avg:'2 Wochen',desc:'Vorbereitungsinspektion beim OEM/Händler verzögert. Manuelle Prüfung AT/GD/OEM-Produktionsliste.'},
-  'ZB II shipping delayed':{id:'3.8',team:'Infleeting – OEM/Dealer',shift:'T-5',avg:'1-2 Wochen',desc:'Versand des Fahrzeugbriefs (ZB II) verzögert. Manuelle Prüfung AT/GD. OEM/Händler kontaktieren.'},
-  'Invoice not paid':{id:'1.5',team:'Infleeting – Finance',shift:'T-10',avg:'2-3 Wochen',desc:'Rechnung nicht bezahlt. Betrifft: Hyundai, Kia, Nissan, Mitsubishi, Tesla, LR Avalon, Feser-Graf. Abstimmung mit Fleet & Finance.'},
-  'Wrong ETA':{id:'—',team:'Fleet',shift:'—',avg:'variabel',desc:'Falsche ETA vom OEM/Händler kommuniziert. ETAs werden jetzt aus Production Reports bezogen.'},
-  'Production delay':{id:'1.1',team:'Infleeting – OEM/Dealer',shift:'T-20',avg:'ab 6 Wochen',desc:'Produktionsschwierigkeiten beim OEM. Nicht aktiv von FINN beeinflussbar. Update im Production-Report.'},
-  'Quality block/recall':{id:'1.2',team:'Infleeting – OEM/Dealer',shift:'fallabhängig',avg:'ab 8 Wochen',desc:'Fahrzeug gesperrt oder zurückgerufen. Information vom OEM über gesperrte/zurückgerufene Fahrzeuge.'},
-  'KBA special approval missing':{id:'3.3',team:'Infleeting – Other',shift:'—',avg:'1 Woche',desc:'Fehlende KBA-Sondergenehmigung (historischer Fall). Information vom Zulassungsdienstleister.'},
-  'Missing Approval OEM':{id:'—',team:'Fleet',shift:'—',avg:'variabel',desc:'Fehlende Genehmigung seitens OEM.'},
-  'Short notice driver cancellation':{id:'4.1',team:'Delivery',shift:'sofort nach Meldung',avg:'1-3 Tage',desc:'Fahrer hat kurzfristig abgesagt. Automatische Benachrichtigung via Slack #opsdev_action_required. Prüfen: Ad-hoc Fixvolumen HFP/Car24 verfügbar?'},
-  'Delivery Breakdown/Damage':{id:'4.5',team:'Transport',shift:'—',avg:'variabel',desc:'Schaden oder Störung am Fahrzeug während der Überführungsfahrt festgestellt.'},
-  'No driver found':{id:'4.2',team:'Delivery',shift:'T-24h',avg:'1-3 Tage',desc:'Kein Fahrer gefunden. Automatische Benachrichtigung via Slack. Mehrfachverzögerungen vermeiden.'},
-  'Peak shaving':{id:'7.1',team:'Delivery',shift:'sofort nach Meldung',avg:'1-2 Tage',desc:'Kurzfristige Kapazitätsengpässe. Compound- und Lieferkapazitätsgrenzen via Slack (2x täglich).'},
-  'Distance too long for one day':{id:'4.3',team:'Delivery',shift:'—',avg:'1-3 Tage',desc:'Strecke zu lang für eine Tagesfahrt. Automatische Benachrichtigung via Slack.'},
-  'Pickup too soon':{id:'—',team:'Other',shift:'—',avg:'variabel',desc:'Abholung zu früh angesetzt (vor eigentlicher Bereitstellung).'},
-  'Unspecified':{id:'7.3',team:'Infleeting – Other',shift:'—',avg:'fallabhängig',desc:'Nicht spezifizierter Delay-Grund. Fallabhängig zu klären.'},
-  'Handover date change requested':{id:'5.1',team:'Customer',shift:'—',avg:'fallabhängig',desc:'Kunde hat Änderung des Liefertermins gewünscht. Nicht von FINN beeinflussbar.'},
-  'Data validation missing':{id:'5.3',team:'Customer',shift:'T-3',avg:'1 Woche',desc:'Datenvalidierung fehlt. Manuelle Prüfung: AT data_validation_status. Nicht von FINN beeinflussbar.'},
-  'Deposit payment delayed':{id:'5.2',team:'Customer',shift:'T-4',avg:'1 Woche',desc:'Kautionszahlung ausstehend. Manuelle Prüfung AT/GD. Nicht von FINN beeinflussbar.'},
-  'SWAP Coordination':{id:'5.5',team:'Customer Request',shift:'—',avg:'variabel',desc:'Fahrzeugtausch-Koordination auf Kundenwunsch.'},
-  'Incorrect registration type':{id:'3.6',team:'Infleeting – Other',shift:'T-4',avg:'1 Woche',desc:'Falscher Zulassungstyp. FPM prüft Zulassungstyp. Zulassungsdienstleister kontaktieren.'},
-};
+const CUSTM=[[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[175,10,20,8],[260,25,28,5]];
 
 const INITS={
-  Tech:[{s:'d',t:'FINN Station availability fix',i:'General tech error: 82→12 (-85%)'},{s:'d',t:'Pickup too soon – automation off',i:'46→6 (-87%)'},{s:'d',t:'Ride not posted – systematic fixes',i:'38→1 (-97%)'},{s:'p',t:'RTD-Gate: SA-number als Pflichtfeld',i:'~65% SA-missing Reduktion erwartet'},{s:'p',t:'RTD-Gate: Damage-Block vor Delivery',i:'~30% Short-notice Reduktion erwartet'},{s:'p',t:'Window intersection – anchored availabilities',i:'~32 Delays/Woche'}],
-  Infleeting:[{s:'d',t:'WHV System-Migration abgeschlossen',i:'Tech/data issue: 62 Delays, einmalig'},{s:'d',t:'Damage-Liste vor WHV-Meeting etabliert',i:'Rückgang Compound damage sichtbar'},{s:'p',t:'SA missing Kippenheim – Priolist-Eskalation',i:'Fiat/Peugeot: 35 Delays, laufend'},{s:'p',t:'SA missing Etzin – Onsite-Eskalation',i:'Opel: volle Pickup-Area (1500 Autos)'},{s:'p',t:'ZB II falsche Adresse – CLM-Abstimmung',i:'MG: 54 Fälle identifiziert'},{s:'w',t:'Fiat Recall – OEM-Eskalation',i:'Auflösung nach KW19 erwartet'}],
-  Fleet:[{s:'d',t:'Wrong ETA – neue ETAs aus Production Reports',i:'35→8 (-77% in 3 Wochen)'},{s:'w',t:'Invoice not paid – Automation abgeschaltet',i:'Kurzzeitiger Anstieg beobachten'},{s:'p',t:'Quality block/recall – Ownership-Klärung',i:'W17 Spike receded'},{s:'w',t:'Production delay OEM – Toyota Pro Ace',i:'45 Einheiten auf Juli verschoben'}],
-  Transport:[{s:'p',t:'Short notice cancellation – RTD Damage-Gate',i:'75% sind Infleeting-Issues (falsch klassifiziert)'},{s:'w',t:'FINN Station Öffnungszeiten – Fahrer-Alignment',i:'Precautionary shifts reduzieren'}],
+  Tech:[{s:'d',t:'FINN Station availability fix',i:'General tech error: 82→2 (-97%)'},{s:'d',t:'Pickup too soon – automation off',i:'18→6 (-67%)'},{s:'d',t:'Ride not posted – systematic fixes',i:'9→1 (-89%)'},{s:'d',t:'Early Swaps backlog cleared',i:'316→8 (-97%)'},{s:'p',t:'RTD-Gate: SA-number als Pflichtfeld',i:'~65% SA-missing Reduktion erwartet'},{s:'p',t:'RTD-Gate: Damage-Block vor Delivery',i:'~30% Short-notice Reduktion erwartet'},{s:'p',t:'Window intersection – anchored availabilities',i:'~32 Delays/Woche'}],
+  Infleeting:[{s:'d',t:'WHV System-Migration abgeschlossen (05.05.)',i:'Tech/data issue: 62 Delays, resolved'},{s:'d',t:'Damage-Liste vor WHV-Meeting etabliert',i:'Compound damage rückläufig'},{s:'p',t:'SA missing Kippenheim – Priolist-Eskalation',i:'Fiat/Peugeot: 35 Delays, laufend'},{s:'p',t:'SA missing Etzin – Onsite-Eskalation',i:'Opel: volle Pickup-Area'},{s:'p',t:'ZB II falsche Adresse – CLM-Abstimmung',i:'MG: 54 Fälle, Sebastian mit CLM in Kontakt'},{s:'w',t:'Fiat Recall – OEM-Eskalation',i:'Auflösung nach KW19 erwartet'}],
+  Fleet:[{s:'d',t:'Wrong ETA – neue ETAs aus Production Reports',i:'35→1 (-97%)'},{s:'w',t:'Invoice not paid – Automation abgeschaltet',i:'Anstieg May 11: 23'},{s:'p',t:'Quality block/recall – Ownership-Klärung',i:'May 4 Spike (31) abgeklungen'},{s:'w',t:'Production delay OEM – Toyota Pro Ace',i:'45 Einheiten auf Juli verschoben'}],
+  Transport:[{s:'p',t:'Short notice cancellation – RTD Damage-Gate',i:'Nur ~11% echte Driver-Cancellations'},{s:'w',t:'Peak shaving May 11 (22)',i:'Kapazitätsengpass beobachten'}],
 };
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
+const RTT={
+  'General internal Tech error':{id:'6.5',team:'Tech',shift:'—',avg:'variabel',desc:'Systemfehler der internen FINN-Technologie. Quelle: AT/GD oder Slack.'},
+  'Ride not posted':{id:'6.4',team:'Tech',shift:'—',avg:'1 Woche',desc:'Fahrt konnte nicht auf Onlogist-Portal gebucht werden. Benachrichtigung via Slack #opsdev_action_required.'},
+  'Weekend/Holiday':{id:'7.2',team:'Tech',shift:'sofort',avg:'1-2 Tage',desc:'Handover fällt auf Wochenende oder Feiertag.'},
+  'SA number missing':{id:'2.10',team:'Infleeting – Compound',shift:'T-3',avg:'ab 2 Tage',desc:'SA-Nummer fehlt (nur Mosolf). Prüfung: AT sa_number_check / SA Number Lists Kippenheim/Etzin.'},
+  'Tech/data issue at compound':{id:'2.15',team:'Infleeting – Compound',shift:'fallabhängig',avg:'fallabhängig',desc:'Technisches oder Datenproblem am Compound. Compound kontaktieren.'},
+  'Compound damage':{id:'2.13',team:'Infleeting – Compound',shift:'sofort',avg:'ab 1 Woche',desc:'Beschädigung am Compound. Information vom Compound mit Schadensbeschreibung.'},
+  'License plates missing':{id:'3.7',team:'Infleeting – Reg. Provider',shift:'sofort',avg:'1 Woche',desc:'Kennzeichen fehlen. Registrierungsdienstleister kontaktieren.'},
+  'PDI delayed compound':{id:'2.5',team:'Infleeting – Compound',shift:'T-2',avg:'ab 3 Tage',desc:'Vorbereitungsinspektion am Compound verzögert.'},
+  'Car malfunctioning (e.g. batteries)':{id:'2.8',team:'Infleeting – Compound',shift:'sofort',avg:'ab 1 Woche',desc:'Fahrzeugstörung (z.B. Batterie). Information vom Compound.'},
+  'Registration process delayed':{id:'3.4',team:'Infleeting – Reg. Provider',shift:'T-3',avg:'1 Woche',desc:'Zulassungsprozess verzögert. Registrierungsdienstleister kontaktieren.'},
+  'ZB II sent to wrong address':{id:'3.1',team:'Infleeting – OEM/Dealer',shift:'T-6',avg:'1 Woche',desc:'Fahrzeugbrief (ZB II) an falsche Adresse geschickt. OEM/Händler kontaktieren.'},
+  'Invoice not paid':{id:'1.5',team:'Infleeting – Finance',shift:'T-10',avg:'2-3 Wochen',desc:'Rechnung nicht bezahlt. Betrifft: Hyundai, Kia, Nissan, Tesla u.a. Abstimmung Fleet & Finance.'},
+  'Wrong ETA':{id:'—',team:'Fleet',shift:'—',avg:'variabel',desc:'Falsche ETA vom OEM. ETAs jetzt aus Production Reports.'},
+  'Production delay':{id:'1.1',team:'Infleeting – OEM/Dealer',shift:'T-20',avg:'ab 6 Wochen',desc:'Produktionsschwierigkeiten beim OEM. Nicht aktiv beeinflussbar.'},
+  'Quality block/recall':{id:'1.2',team:'Infleeting – OEM/Dealer',shift:'fallabhängig',avg:'ab 8 Wochen',desc:'Fahrzeug gesperrt oder zurückgerufen. Information vom OEM.'},
+  'Short notice driver cancellation':{id:'4.1',team:'Delivery',shift:'sofort',avg:'1-3 Tage',desc:'Fahrer hat kurzfristig abgesagt (~11% echte Fälle, ~89% sind Car-not-ready). Slack #opsdev_action_required.'},
+  'Delivery Breakdown/Damage':{id:'4.5',team:'Transport',shift:'—',avg:'variabel',desc:'Schaden oder Störung während der Überführungsfahrt.'},
+  'No driver found':{id:'4.2',team:'Delivery',shift:'T-24h',avg:'1-3 Tage',desc:'Kein Fahrer gefunden. Slack-Benachrichtigung.'},
+  'Peak shaving':{id:'7.1',team:'Delivery',shift:'sofort',avg:'1-2 Tage',desc:'Kurzfristige Kapazitätsengpässe. Compound-Limits via Slack 2x täglich.'},
+  'Distance too long for one day':{id:'4.3',team:'Delivery',shift:'—',avg:'1-3 Tage',desc:'Strecke zu lang für eine Tagesfahrt.'},
+  'Pickup too soon':{id:'—',team:'Other',shift:'—',avg:'variabel',desc:'Abholung zu früh angesetzt.'},
+  'Handover date change requested':{id:'5.1',team:'Customer',shift:'—',avg:'fallabhängig',desc:'Kunde hat Änderung des Liefertermins gewünscht. Nicht von FINN beeinflussbar.'},
+  'Data validation missing':{id:'5.3',team:'Customer',shift:'T-3',avg:'1 Woche',desc:'Datenvalidierung fehlt. AT data_validation_status prüfen.'},
+  'Deposit payment delayed':{id:'5.2',team:'Customer',shift:'T-4',avg:'1 Woche',desc:'Kautionszahlung ausstehend. AT/GD prüfen.'},
+  'SWAP Coordination':{id:'5.5',team:'Customer Request',shift:'—',avg:'variabel',desc:'Fahrzeugtausch-Koordination auf Kundenwunsch.'},
+  'KBA special approval missing':{id:'3.3',team:'Infleeting – Other',shift:'—',avg:'1 Woche',desc:'Fehlende KBA-Sondergenehmigung. Information vom Zulassungsdienstleister.'},
+  'Missing Approval OEM':{id:'—',team:'Fleet',shift:'—',avg:'variabel',desc:'Fehlende Genehmigung seitens OEM.'},
+};
+
 function wt(w,t){
   if(t==='Customer')return CR.filter(r=>r.w===w).reduce((s,r)=>s+r.c,0);
   if(t==='Overall')return TEAMS.reduce((s,x)=>s+wt(w,x),0);
@@ -408,17 +351,8 @@ function fd(cur,prv){
 }
 function reasonBar(r,c,mxR,col){
   const tt=RTT[r];
-  const tooltipHtml=tt?`<div class="reason-tooltip">
-    <strong>${r}</strong>
-    ${tt.desc}
-    <div class="rt-meta">ID: ${tt.id} · Team: ${tt.team} · Shift: ${tt.shift} · Ø Dauer: ${tt.avg}</div>
-  </div>`:'';
-  return `<div class="brow">
-    <div class="blabel" title="${r}${tt?' (hover für Details)':''}">${r}</div>
-    <div class="btrack"><div class="bfill" style="width:${Math.round(c/mxR*100)}%;background:${col}"></div></div>
-    <div class="bval">${c}</div>
-    ${tooltipHtml}
-  </div>`;
+  const tip=tt?`<div class="reason-tooltip"><strong>${r}</strong>${tt.desc}<div class="rt-meta">ID: ${tt.id} · Team: ${tt.team} · Shift: ${tt.shift} · Ø Dauer: ${tt.avg}</div></div>`:'';
+  return `<div class="brow"><div class="blabel" title="${r}">${r}</div><div class="btrack"><div class="bfill" style="width:${Math.round(c/mxR*100)}%;background:${col}"></div></div><div class="bval">${c}</div>${tip}</div>`;
 }
 
 const DIV_PLUGIN={id:'div',afterDraw(c){
@@ -428,13 +362,8 @@ const DIV_PLUGIN={id:'div',afterDraw(c){
   ctx.beginPath();ctx.moveTo(px,y.top);ctx.lineTo(px,y.bottom);ctx.stroke();ctx.restore();
 }};
 
-let CM=null,RM=null,NM2=null,HSRC=null;
-let activeTab='Overall';
-// Use LAST_COMPLETE_W for comparisons (not the partial current week)
-const LW=WEEKS[WEEKS.length-1]; // May 4 – shown but marked partial
-const PW=LAST_COMPLETE_W;        // Apr 27 – last complete, used for display
-const CMP_W=LAST_COMPLETE_W;     // Apr 27 – reference for WoW delta
-const CMP_W_PREV=PREV_COMPLETE_W; // Apr 20 – comparison base for WoW delta
+let CM=null,RM=null,NM2=null,HSRC=null,activeTab='Overall';
+const CMP_W=LAST_COMPLETE_W,CMP_W_PREV=PREV_COMPLETE_W;
 
 function buildMain(tab){
   const ctx=document.getElementById('mc');if(!ctx)return;
@@ -442,7 +371,7 @@ function buildMain(tab){
   const leg=document.getElementById('ml');leg.innerHTML='';
   const aidx=ALL.map((_,i)=>i);let ds;
   if(tab==='Overall'){
-    ds=TEAMS.map(t=>({label:t,data:aidx.map(i=>at(i,t)),borderColor:TC[t],backgroundColor:TC[t],tension:.35,borderWidth:2,pointRadius:aidx.map(i=>i<NM?3:4),pointHoverRadius:7}));
+    ds=TEAMS.map(t=>({label:t,data:aidx.map(i=>at(i,t)),borderColor:TC[t],backgroundColor:TC[t],tension:.35,borderWidth:2,pointRadius:aidx.map(i=>i<NM?3:isWeekComplete(WEEKS[i-NM])?4:3),pointHoverRadius:7}));
     leg.innerHTML=TEAMS.map(t=>`<span><span class="ldot" style="background:${TC[t]}"></span>${t}</span>`).join('');
   } else {
     const col=TC[tab]||'#378ADD';
@@ -466,7 +395,10 @@ function buildReason(tab){
   const rset=new Set();
   if(MDATA[tab])Object.keys(MDATA[tab]).forEach(r=>rset.add(r));
   WR.filter(r=>r.t===tab).forEach(r=>rset.add(r.r));
-  const scored=[...rset].map(r=>{const lv=WR.filter(x=>x.t===tab&&x.w===LW&&x.r===r).reduce((s,x)=>s+x.c,0);return{r,lv};}).sort((a,b)=>b.lv-a.lv).slice(0,6);
+  const scored=[...rset].map(r=>{
+    const lv=WR.filter(x=>x.t===tab&&x.w===CMP_W&&x.r===r).reduce((s,x)=>s+x.c,0);
+    return{r,lv};
+  }).sort((a,b)=>b.lv-a.lv).slice(0,6);
   const leg=document.getElementById('rl');leg.innerHTML='';
   const ds=scored.map(({r},i)=>{
     const data=aidx.map(idx=>{if(idx<NM)return(MDATA[tab]?.[r]?.[idx])||0;return WR.filter(x=>x.t===tab&&x.w===WEEKS[idx-NM]&&x.r===r).reduce((s,x)=>s+x.c,0);});
@@ -482,133 +414,83 @@ function buildReason(tab){
 function buildNoticeChart(){
   const ctx=document.getElementById('nmc');if(!ctx)return;
   if(NM2){NM2.destroy();NM2=null;}
-  const mLabels=NOTICE_MONTHLY.labels;
-  const allLabels=[...mLabels,...WL];
-  const lateData=[...NOTICE_MONTHLY.late,...NOTICE_WEEKLY.late];
-  const shortData=[...NOTICE_MONTHLY.short,...NOTICE_WEEKLY.short];
-  const longData=[...NOTICE_MONTHLY.long,...NOTICE_WEEKLY.long];
-  const NML=mLabels.length;
-  NM2=new Chart(ctx,{
-    type:'bar',
-    data:{labels:allLabels,datasets:[
-      {label:'late notice (<0 days)',data:lateData,backgroundColor:'#374151',stack:'a'},
-      {label:'long notice (≥4 days)',data:longData,backgroundColor:'#378ADD',stack:'a'},
-      {label:'short notice (0-3 days)',data:shortData,backgroundColor:'rgba(180,178,169,0.7)',stack:'a'},
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{
-        afterBody:items=>{const tot=items.reduce((s,i)=>s+i.parsed.y,0);return [`Total: ${tot}`];}
-      }}},
-      scales:{
-        x:{stacked:true,ticks:{font:{size:10},color:(c)=>c.index<NML?'#3a3a3a':'#666',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
-        y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.04)'}}
-      }
-    },plugins:[{id:'divN',afterDraw(c){
-      const ctx=c.ctx,x=c.scales.x,y=c.scales.y;
-      const px=(x.getPixelForValue(NML-1)+x.getPixelForValue(NML))/2;
-      ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1.5;
-      ctx.beginPath();ctx.moveTo(px,y.top);ctx.lineTo(px,y.bottom);ctx.stroke();ctx.restore();
-    }}]
-  });
+  const mL=NOTICE_MONTHLY.labels,allL=[...mL,...WL],NML=mL.length;
+  const lateD=[...NOTICE_MONTHLY.late,...NOTICE_WEEKLY.late];
+  const shortD=[...NOTICE_MONTHLY.short,...NOTICE_WEEKLY.short];
+  const longD=[...NOTICE_MONTHLY.long,...NOTICE_WEEKLY.long];
+  NM2=new Chart(ctx,{type:'bar',data:{labels:allL,datasets:[
+    {label:'late notice (<0 days)',data:lateD,backgroundColor:'#374151',stack:'a'},
+    {label:'long notice (≥4 days)',data:longD,backgroundColor:'#378ADD',stack:'a'},
+    {label:'short notice (0-3 days)',data:shortD,backgroundColor:'rgba(180,178,169,0.7)',stack:'a'},
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{afterBody:items=>{const tot=items.reduce((s,i)=>s+i.parsed.y,0);return [`Total: ${tot}`];}}}},
+    scales:{x:{stacked:true,ticks:{font:{size:10},color:(c)=>c.index<NML?'#3a3a3a':'#666',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.04)'}}}
+  },plugins:[{id:'divN',afterDraw(c){const ctx=c.ctx,x=c.scales.x,y=c.scales.y;const px=(x.getPixelForValue(NML-1)+x.getPixelForValue(NML))/2;ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(px,y.top);ctx.lineTo(px,y.bottom);ctx.stroke();ctx.restore();}}]});
 }
 
 function buildHSRChart(){
   const ctx=document.getElementById('hsrc');if(!ctx)return;
   if(HSRC){HSRC.destroy();HSRC=null;}
-  const mData=HSR_MONTHLY;
-  const wData=WEEKS.map(w=>HSR_WEEKLY[w]||null);
-  const data=[...mData,...wData];
-  HSRC=new Chart(ctx,{
-    type:'line',
-    data:{labels:ALL,datasets:[{
-      label:'Handover Success Rate %',
-      data,borderColor:'#4ade80',backgroundColor:'#4ade80',
-      tension:.35,borderWidth:2.5,
-      pointRadius:ALL.map((_,i)=>i<NM?3:data[i]===null?0:5),
-      pointHoverRadius:7,
-      spanGaps:false,
-    }]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:i=>`Success Rate: ${i.parsed.y}%`}}},
-      scales:{
-        x:{ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#666',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
-        y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'}}
-      }
-    },plugins:[DIV_PLUGIN]
-  });
+  const mData=HSR_M;
+  const wData=WEEKS.map(w=>HSR[w]!==undefined?HSR[w]:null);
+  HSRC=new Chart(ctx,{type:'line',data:{labels:ALL,datasets:[{label:'HSR %',data:[...mData,...wData],borderColor:'#4ade80',backgroundColor:'#4ade80',tension:.35,borderWidth:2.5,pointRadius:ALL.map((_,i)=>i<NM?3:(wData[i-NM]===null?0:5)),pointHoverRadius:7,spanGaps:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:i=>`Success Rate: ${i.parsed.y}%`}}},
+      scales:{x:{ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#666',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}
+    },plugins:[DIV_PLUGIN]});
 }
 
-// ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
   const tab=activeTab,isOv=tab==='Overall',col=TC[tab]||'#378ADD';
-
-  // ── COMPARISON LOGIC: only completed periods ──────────────────────────────
-  // Weekly: compare last complete (Apr 27) vs prev complete (Apr 20)
-  const cmpW=wt(CMP_W,tab);      // Apr 27 – last complete week
-  const cmpWPrev=wt(CMP_W_PREV,tab); // Apr 20 – comparison base
-  // Current partial week for display only (no delta against it)
+  const cmpW=wt(CMP_W,tab),cmpWP=wt(CMP_W_PREV,tab);
   const partialW=CURRENT_PARTIAL_W?wt(CURRENT_PARTIAL_W,tab):null;
-
-  // Monthly: compare last complete month (Apr, idx 3) vs prev complete (Mar, idx 2)
-  const cmpM=mt(LAST_COMPLETE_M_IDX,tab);
-  const cmpMPrev=mt(PREV_COMPLETE_M_IDX,tab);
-  const lastCompleteMonthLabel=ML[LAST_COMPLETE_M_IDX];   // Apr
-  const prevCompleteMonthLabel=ML[PREV_COMPLETE_M_IDX];   // Mar
-
-  // HSR: last complete week (Apr 27 = 72.9%) vs prev complete (Apr 20 = 68.2%)
-  const hsrCmp=HSR_WEEKLY[CMP_W]||null;
-  const hsrCmpPrev=HSR_WEEKLY[CMP_W_PREV]||null;
-
+  const cmpM=mt(LAST_COMPLETE_M_IDX,tab),cmpMP=mt(PREV_COMPLETE_M_IDX,tab);
+  const lastCML=ML[LAST_COMPLETE_M_IDX],prevCML=ML[PREV_COMPLETE_M_IDX];
+  const hsrCmp=HSR[CMP_W],hsrCmpP=HSR[CMP_W_PREV];
   const svk=WEEKS.map(w=>wt(w,tab));
-  const rs=topR(CMP_W,tab,8),mxR=rs[0]?.c||1; // reasons from last complete week
+  const rs=topR(CMP_W,tab,8),mxR=rs[0]?.c||1;
 
-  // Slack status banners
-  const slackBanners=`
-    <div class="slack-status">
-      <div class="slack-pill ${SLACK_STATUS.infleeting.available?'slack-ok':'slack-missing'}">
-        ${SLACK_STATUS.infleeting.available?'✓':'⚠'} Infleeting Weekly Update
-        ${SLACK_STATUS.infleeting.available?`Stand: ${SLACK_STATUS.infleeting.stand}`:`Noch nicht verfügbar – letzter Stand: ${SLACK_STATUS.infleeting.stand}`}
-      </div>
-      <div class="slack-pill ${SLACK_STATUS.tech.available?'slack-ok':'slack-missing'}">
-        ${SLACK_STATUS.tech.available?'✓':'⚠'} Tech Weekly Update
-        ${SLACK_STATUS.tech.available?`Stand: ${SLACK_STATUS.tech.stand}`:`Noch nicht verfügbar – letzter Stand: ${SLACK_STATUS.tech.stand}`}
-      </div>
-    </div>`;
+  const slackBanners=`<div class="slack-status">
+    <div class="slack-pill ${SLACK_STATUS.infleeting.available?'slack-ok':'slack-missing'}">
+      ${SLACK_STATUS.infleeting.available?'✓':'⚠'} Infleeting Update · ${SLACK_STATUS.infleeting.stand}
+      ${SLACK_STATUS.infleeting.available?` · ${SLACK_STATUS.infleeting.summary.substring(0,80)}…`:'– ausstehend'}
+    </div>
+    <div class="slack-pill ${SLACK_STATUS.tech.available?'slack-ok':'slack-missing'}">
+      ${SLACK_STATUS.tech.available?'✓':'⚠'} Tech Update · ${SLACK_STATUS.tech.stand}
+      ${SLACK_STATUS.tech.available?` · ${SLACK_STATUS.tech.summary.substring(0,80)}…`:'– ausstehend'}
+    </div>
+  </div>`;
 
-  // KPI cards
-  const kpiCards=`
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-label">Letzte abgeschl. Woche (Apr 27)</div>
-        <div class="kpi-val">${cmpW}</div>
-        <div class="kpi-delta">${fd(cmpW,cmpWPrev)} vs. Apr 20</div>
-        <div class="kpi-sub">Vergleich: abgeschl. ↔ abgeschl.</div>
-      </div>
-      ${partialW!==null?`<div class="kpi-card" style="border-color:rgba(251,191,36,0.25);background:rgba(251,191,36,0.04)">
-        <div class="kpi-label" style="color:#fbbf24">Laufende Woche (May 4) ⚠ unvollst.</div>
-        <div class="kpi-val" style="color:#fbbf24">${partialW}</div>
-        <div class="kpi-sub" style="color:#664d00">Kein Vergleich – Woche läuft noch (Do 07.05.)</div>
-      </div>`:''}
-      <div class="kpi-card ${hsrCmp>=70?'success':'warn'}">
-        <div class="kpi-label">Handover Success Rate (Apr 27)</div>
-        <div class="kpi-val">${hsrCmp||'—'}%</div>
-        <div class="kpi-delta">${hsrCmp&&hsrCmpPrev?fd(hsrCmp,hsrCmpPrev)+' vs. Apr 20':''}</div>
-        <div class="kpi-sub">Ziel: ≥70% · abgeschl. ↔ abgeschl.</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Monat ${lastCompleteMonthLabel} (abgeschlossen)</div>
-        <div class="kpi-val">${cmpM}</div>
-        <div class="kpi-delta">${fd(cmpM,cmpMPrev)} vs. ${prevCompleteMonthLabel}</div>
-        <div class="kpi-sub">Vergleich: abgeschl. ↔ abgeschl.</div>
-      </div>
-      <div class="spark-kpi">
-        <div class="kpi-label" style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">10-Wochen Trend – ${tab}</div>
-        ${spk(svk,col,44,220)}
-        <div style="display:flex;justify-content:space-between;font-size:9px;color:#2a2a2a;margin-top:4px;"><span>${WL[0]}</span><span>${WL[WL.length-1]} ⚠</span></div>
-      </div>
-    </div>`;
+  const kpiCards=`<div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Letzte abgeschl. Woche (${WL[WEEKS.indexOf(CMP_W)]})</div>
+      <div class="kpi-val">${cmpW}</div>
+      <div class="kpi-delta">${fd(cmpW,cmpWP)} vs. ${WL[WEEKS.indexOf(CMP_W_PREV)]}</div>
+      <div class="kpi-sub">abgeschl. ↔ abgeschl.</div>
+    </div>
+    ${partialW!==null?`<div class="kpi-card" style="border-color:rgba(251,191,36,0.25);background:rgba(251,191,36,0.03)">
+      <div class="kpi-label" style="color:#fbbf24">Laufende Woche (${WL[WEEKS.indexOf(CURRENT_PARTIAL_W)]}) ⚠</div>
+      <div class="kpi-val" style="color:#fbbf24">${partialW}</div>
+      <div class="kpi-sub" style="color:#664d00">Woche läuft noch – kein Vergleich</div>
+    </div>`:''}
+    <div class="kpi-card ${hsrCmp>=70?'success':'warn'}">
+      <div class="kpi-label">Handover Success Rate (${WL[WEEKS.indexOf(CMP_W)]})</div>
+      <div class="kpi-val">${hsrCmp||'—'}%</div>
+      <div class="kpi-delta">${hsrCmp&&hsrCmpP?fd(hsrCmp,hsrCmpP)+' vs. '+WL[WEEKS.indexOf(CMP_W_PREV)]:''}</div>
+      <div class="kpi-sub">Ziel: ≥70% · abgeschl. ↔ abgeschl.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Monat ${lastCML} (abgeschlossen)</div>
+      <div class="kpi-val">${cmpM}</div>
+      <div class="kpi-delta">${fd(cmpM,cmpMP)} vs. ${prevCML}</div>
+      <div class="kpi-sub">abgeschl. ↔ abgeschl.</div>
+    </div>
+    <div class="spark-kpi">
+      <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">12-Wochen Trend – ${tab}</div>
+      ${spk(svk,col,44,220)}
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:#2a2a2a;margin-top:4px;"><span>${WL[0]}</span><span>${WL[WL.length-1]}*</span></div>
+    </div>
+  </div>`;
 
-  // Team tiles – use last complete week for tile values and WoW delta
   let tgrid='';
   if(isOv){
     tgrid=`<div class="tgrid">${TEAMS.map(t=>{
@@ -619,65 +501,37 @@ function render(){
       </div>`;}).join('')}</div>`;
   }
 
-  // Right panel
   let rp='';
   if(!isOv&&tab!=='Customer'&&INITS[tab]){
     rp=`<div class="panel"><div class="ptitle">Aktive Initiativen — ${tab}</div>${INITS[tab].map(({s,t,i})=>
       `<div class="iitem"><span class="badge ${s==='d'?'bd':s==='p'?'bp':'bw'}">${s==='d'?'✓ done':s==='p'?'⟳ progress':'⚠ watch'}</span><div><div class="itext">${t}</div><div class="iimp">${i}</div></div></div>`).join('')}</div>`;
   } else {
-    rp=`<div class="panel"><div class="ptitle">Wöchentlicher Verlauf — letzte 6 abgeschl. Wochen</div>${WEEKS.slice(-7,-1).map((w,i)=>{
-      // Only show last 6 complete weeks (exclude the partial current week)
-      if(!isWeekComplete(w))return'';
-      const v=wt(w,tab),mx=Math.max(...COMPLETE_WEEKS.map(x=>wt(x,tab)),1);
-      const lbl=WL[WEEKS.indexOf(w)];
-      const isLast=w===CMP_W;
-      return `<div class="brow"><div class="blabel" style="${isLast?'color:#fff':''}">${lbl}${isLast?' ✓':''}</div><div class="btrack"><div class="bfill" style="width:${Math.round(v/mx*100)}%;background:${isLast?col:col+'88'}"></div></div><div class="bval" style="${isLast?'color:#fff':''}">${v}</div></div>`;
-    }).join('')}
-    ${CURRENT_PARTIAL_W?`<div class="brow" style="opacity:.5"><div class="blabel" style="color:#fbbf24">${WL[WEEKS.indexOf(CURRENT_PARTIAL_W)]} ⚠ laufend</div><div class="btrack"><div class="bfill" style="width:${Math.round(wt(CURRENT_PARTIAL_W,tab)/Math.max(...COMPLETE_WEEKS.map(x=>wt(x,tab)),1)*100)}%;background:#fbbf24"></div></div><div class="bval" style="color:#fbbf24">${wt(CURRENT_PARTIAL_W,tab)}</div></div>`:''}
+    const cWeeks=COMPLETE_WEEKS.slice(-6);
+    rp=`<div class="panel"><div class="ptitle">Wöchentlicher Verlauf — letzte 6 abgeschl. Wochen</div>
+      ${cWeeks.map(w=>{const v=wt(w,tab),mx=Math.max(...COMPLETE_WEEKS.map(x=>wt(x,tab)),1),isLast=w===CMP_W,lbl=WL[WEEKS.indexOf(w)];return `<div class="brow"><div class="blabel" style="${isLast?'color:#fff':''}">${lbl}${isLast?' ✓':''}</div><div class="btrack"><div class="bfill" style="width:${Math.round(v/mx*100)}%;background:${isLast?col:col+'88'}"></div></div><div class="bval" style="${isLast?'color:#fff':''}">${v}</div></div>`;}).join('')}
+      ${CURRENT_PARTIAL_W?`<div class="brow" style="opacity:.5"><div class="blabel" style="color:#fbbf24">${WL[WEEKS.indexOf(CURRENT_PARTIAL_W)]} ⚠ laufend</div><div class="btrack"><div class="bfill" style="width:${Math.round(wt(CURRENT_PARTIAL_W,tab)/Math.max(...COMPLETE_WEEKS.map(x=>wt(x,tab)),1)*100)}%;background:#fbbf24"></div></div><div class="bval" style="color:#fbbf24">${wt(CURRENT_PARTIAL_W,tab)}</div></div>`:''}
     </div>`;
   }
 
-  // Table – mark partial weeks/months
   const tteams=isOv?TEAMS:tab==='Customer'?['Customer']:[tab];
   const trows=tteams.map(t=>{
-    const mc=MONTHS.map((_,mi)=>{
-      const isCurrentMonth=!isMonthComplete(MONTHS[mi]);
-      return `<td class="tdm${mi===0?' tddiv':''}" style="${isCurrentMonth?'color:#664d00':''}" title="${isCurrentMonth?'Laufender Monat – unvollständig':''}">${mt(mi,t)||'—'}${isCurrentMonth?'*':''}</td>`;
-    }).join('');
-    const wc=WEEKS.map((w,wi)=>{
-      const v=tab==='Customer'?CR.filter(r=>r.w===w).reduce((s,r)=>s+r.c,0):WR.filter(r=>r.w===w&&r.t===t).reduce((s,r)=>s+r.c,0);
-      const isComplete=isWeekComplete(w);
-      const isLastComplete=w===CMP_W;
-      return `<td class="${wi===0?'tdw tddiv':''}" style="${isLastComplete?'color:#fff;font-weight:600':isComplete?'color:#666':'color:#664d00'}" title="${!isComplete?'Laufende Woche – unvollständig':''}">${v||'—'}${!isComplete?'*':''}</td>`;
-    }).join('');
+    const mc=MONTHS.map((_,mi)=>{const isCM=!isMonthComplete(MONTHS[mi]),isLM=mi===LAST_COMPLETE_M_IDX;return `<td class="tdm${mi===0?' tddiv':''}" style="${isCM?'color:#664d00':isLM?'color:#ccc':''}">${mt(mi,t)||'—'}${isCM?'*':''}</td>`;}).join('');
+    const wc=WEEKS.map((w,wi)=>{const v=tab==='Customer'?CR.filter(r=>r.w===w).reduce((s,r)=>s+r.c,0):WR.filter(r=>r.w===w&&r.t===t).reduce((s,r)=>s+r.c,0);const isC=isWeekComplete(w),isLast=w===CMP_W;return `<td class="${wi===0?'tdw tddiv':''}" style="${isLast?'color:#fff;font-weight:600':isC?'color:#666':'color:#664d00'}">${v||'—'}${!isC?'*':''}</td>`;}).join('');
     return `<tr><td style="color:${TC[t]||'#aaa'}">${t}</td>${mc}${wc}</tr>`;
   }).join('');
-  const totrow=`<tr class="trow"><td>Total</td>${MONTHS.map((_,mi)=>{
-    const isCurrentMonth=!isMonthComplete(MONTHS[mi]);
-    return `<td class="tdm${mi===0?' tddiv':''}" style="${isCurrentMonth?'color:#664d00':''}">${at(mi,tab)}${isCurrentMonth?'*':''}</td>`;
-  }).join('')}${WEEKS.map((w,wi)=>{
-    const isComplete=isWeekComplete(w);
-    const isLastComplete=w===CMP_W;
-    return `<td class="${wi===0?'tdw tddiv':''}" style="${isLastComplete?'color:#fff;font-weight:600':isComplete?'color:#555':'color:#664d00'}">${at(NM+wi,tab)}${!isComplete?'*':''}</td>`;
-  }).join('')}</tr>`;
+  const totrow=`<tr class="trow"><td>Total</td>${MONTHS.map((_,mi)=>{const isCM=!isMonthComplete(MONTHS[mi]),isLM=mi===LAST_COMPLETE_M_IDX;return `<td class="tdm${mi===0?' tddiv':''}" style="${isCM?'color:#664d00':isLM?'color:#ccc':''}">${at(mi,tab)}${isCM?'*':''}</td>`;}).join('')}${WEEKS.map((w,wi)=>{const isC=isWeekComplete(w),isLast=w===CMP_W;return `<td class="${wi===0?'tdw tddiv':''}" style="${isLast?'color:#fff;font-weight:600':isC?'color:#555':'color:#664d00'}">${at(NM+wi,tab)}${!isC?'*':''}</td>`;}).join('')}</tr>`;
 
   document.getElementById('dash').innerHTML=`
     <div class="header">
       <div>
-        <div class="live-row">
-          <div class="dot"></div>
-          <span class="live-label">Stand ${STAND}</span>
-          ${!SLACK_STATUS.infleeting.available||!SLACK_STATUS.tech.available?'<span class="update-banner">⚠ Nicht alle Slack-Updates verfügbar</span>':''}
-        </div>
+        <div class="live-row"><div class="dot"></div><span class="live-label">Stand ${STAND}</span></div>
         <h1>CC Logistics · Delay Dashboard</h1>
-        <div class="meta">6 Monate monatlich · letzte 10 Wochen wöchentlich · biweekly aktualisiert</div>
+        <div class="meta">6 Monate monatlich · letzte 12 Wochen wöchentlich · biweekly aktualisiert</div>
       </div>
-      <div style="font-size:11px;color:#444;text-align:right;">DWH: <code>fact_car_handover_event</code><br>fact_clsr_touchpoints</div>
+      <div style="font-size:11px;color:#444;text-align:right;">DWH: <code>fact_car_handover_event</code><br>+ fact_clsr_touchpoints</div>
     </div>
-
     ${slackBanners}
     ${kpiCards}
-
     <div class="tabs">
       <span class="tglabel">Overview</span>
       <button class="tab" onclick="setTab('Overall')" style="${isOv?'background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5);color:#fff;font-weight:600':''}">Overall</button>
@@ -688,34 +542,29 @@ function render(){
       <span class="tglabel">Extern</span>
       <button class="tab" onclick="setTab('Customer')" style="${tab==='Customer'?`background:${TC.Customer}22;border-color:${TC.Customer};color:${TC.Customer};font-weight:600`:`border-color:${TC.Customer}55;color:${TC.Customer}99`}">Customer-caused</button>
     </div>
-
     ${tgrid}
-
     <div class="cbox">
       <div class="ctitle">${isOv?'Gesamtentwicklung – alle Teams':'Gesamtentwicklung – '+tab}</div>
-      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; Tooltip zeigt Total je Periode</div>
+      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; * = laufende Periode</div>
       <div class="cleg" id="ml"></div>
       <div style="position:relative;width:100%;height:200px;"><canvas id="mc"></canvas></div>
     </div>
-
     <div class="cbox" id="rw" style="display:none">
       <div class="ctitle">Top Delay Reasons – Verlauf (${tab})</div>
-      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich →</div>
+      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; Top 6 nach letzter abgeschl. Woche</div>
       <div class="cleg" id="rl"></div>
       <div style="position:relative;width:100%;height:200px;"><canvas id="rc"></canvas></div>
     </div>
-
     <div class="g2">
       <div class="panel">
-        <div class="ptitle">Top Delay Reasons — Apr 27 (letzte abgeschl. Woche) &nbsp;<span style="font-size:9px;color:#444;font-weight:400;text-transform:none;">(hover für Details)</span></div>
+        <div class="ptitle">Top Delay Reasons — ${WL[WEEKS.indexOf(CMP_W)]} (letzte abgeschl. Woche) &nbsp;<span style="font-size:9px;color:#444;font-weight:400;text-transform:none;">hover für Details</span></div>
         ${rs.map(({r,c})=>reasonBar(r,c,mxR,col)).join('')}
       </div>
       ${rp}
     </div>
-
     <div class="cbox">
       <div class="ctitle">Delay Notice Period — Monatlich + Wöchentlich</div>
-      <div class="csub">← monatlich (Okt–Mar) &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; Late notice = bereits überfällig bei Shift; Short notice = 0-3 Tage; Long notice = ≥4 Tage</div>
+      <div class="csub">← monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; Late=überfällig; Short=0-3 Tage; Long=≥4 Tage</div>
       <div class="notice-legend">
         <span><span class="ldot" style="background:#378ADD"></span>Long notice (≥4 days)</span>
         <span><span class="ldot" style="background:rgba(180,178,169,0.7)"></span>Short notice (0-3 days)</span>
@@ -723,29 +572,23 @@ function render(){
       </div>
       <div style="position:relative;width:100%;height:220px;"><canvas id="nmc"></canvas></div>
     </div>
-
     <div class="cbox">
       <div class="ctitle">Handover Success Rate — Verlauf</div>
-      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; May 11: Daten noch nicht vollständig verfügbar</div>
+      <div class="csub">← 6 Monate monatlich &nbsp;|&nbsp; wöchentlich → &nbsp;·&nbsp; May 11+ noch nicht vollständig verfügbar</div>
       <div style="position:relative;width:100%;height:160px;"><canvas id="hsrc"></canvas></div>
     </div>
-
     <div class="twrap">
       <div class="ptitle" style="margin-bottom:4px">Detail-Tabelle — monatlich + wöchentlich</div>
-      <div style="font-size:10px;color:#555;margin-bottom:12px;">* = laufende Periode (unvollständig) · <strong style="color:#fff">Fett</strong> = letzte abgeschlossene Periode · Deltas immer abgeschl. ↔ abgeschl.</div>
+      <div style="font-size:10px;color:#555;margin-bottom:12px;">* = laufende Periode (unvollst.) · <strong style="color:#ccc">Hell</strong> = letzte abgeschl. Periode · Deltas: abgeschl. ↔ abgeschl.</div>
       <table><thead><tr>
         <th style="text-align:left">Team</th>
-        ${MONTHS.map((_,i)=>{const isCurr=!isMonthComplete(MONTHS[i]);return `<th class="thm${i===0?' thdiv':''}" style="${isCurr?'color:#664d00':i===LAST_COMPLETE_M_IDX?'color:#fff;font-weight:600':''}">${ML[i]}${isCurr?'*':''}</th>`;}).join('')}
-        ${WEEKS.map((w,i)=>{const isC=isWeekComplete(w);const isLast=w===CMP_W;return `<th class="${i===0?'thdiv ':''}" style="${isLast?'color:#fff;font-weight:600':isC?'color:#aaa':'color:#664d00'}">${WL[i]}${!isC?'*':''}</th>`;}).join('')}
+        ${MONTHS.map((_,i)=>{const isCM=!isMonthComplete(MONTHS[i]),isLM=i===LAST_COMPLETE_M_IDX;return `<th class="thm${i===0?' thdiv':''}" style="${isCM?'color:#664d00':isLM?'color:#ccc':''}">${ML[i]}${isCM?'*':''}</th>`;}).join('')}
+        ${WEEKS.map((w,i)=>{const isC=isWeekComplete(w),isLast=w===CMP_W;return `<th class="${i===0?'thdiv ':''}" style="${isLast?'color:#fff;font-weight:600':isC?'color:#aaa':'color:#664d00'}">${WL[i]}${!isC?'*':''}</th>`;}).join('')}
       </tr></thead><tbody>${trows}${totrow}</tbody></table>
     </div>
     <div class="footer">fact_car_handover_event + fact_clsr_touchpoints · delay_days > 0 · non-silent · Stand ${STAND} · * = laufende Periode</div>
   `;
-
-  buildMain(tab);
-  buildReason(tab);
-  buildNoticeChart();
-  buildHSRChart();
+  buildMain(tab);buildReason(tab);buildNoticeChart();buildHSRChart();
 }
 
 window.setTab=function(t){activeTab=t;render();};
