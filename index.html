@@ -516,7 +516,7 @@ function buildMain(tab){
         y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}},
       }
     },
-    plugins:[DVIDER]
+    plugins:[DVIDER,ChartDataLabels]
   });
 }
 
@@ -543,7 +543,7 @@ function buildReason(tab){
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},datalabels:{display:false},tooltip:{mode:'index',intersect:false}},
       scales:{x:{ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#777',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},y:{beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}}}
-    },plugins:[DVIDER]
+    },plugins:[DVIDER,ChartDataLabels]
   });
 }
 
@@ -625,21 +625,15 @@ function buildNotice(ntab){
         const c2=chart.ctx;
         const xScale=chart.scales.x;
         const yScale=chart.scales.y;
+        if(!xScale||!yScale)return;
         const px=(xScale.getPixelForValue(NML-1)+xScale.getPixelForValue(NML))/2;
-        c2.save();
-        c2.setLineDash([5,5]);
-        c2.strokeStyle='rgba(255,255,255,0.2)';
-        c2.lineWidth=1.5;
-        c2.beginPath();
-        c2.moveTo(px,yScale.top);
-        c2.lineTo(px,yScale.bottom);
-        c2.stroke();
-        c2.fillStyle='rgba(255,255,255,0.25)';
-        c2.font='9px DM Sans';
-        c2.fillText('monthly \u2190 | \u2192 weekly',px-46,yScale.top-6);
+        c2.save();c2.setLineDash([5,5]);c2.strokeStyle='rgba(255,255,255,0.2)';c2.lineWidth=1.5;
+        c2.beginPath();c2.moveTo(px,yScale.top);c2.lineTo(px,yScale.bottom);c2.stroke();
+        c2.fillStyle='rgba(255,255,255,0.25)';c2.font='9px sans-serif';
+        c2.fillText('monthly | weekly',px-44,yScale.top-4);
         c2.restore();
       }
-    }]
+    },ChartDataLabels]
   });
 }
 
@@ -692,7 +686,7 @@ function buildHSR(){
         y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:function(v){return v+'%';}},grid:{color:'rgba(255,255,255,0.05)'}},
       }
     },
-    plugins:[DVIDER]
+    plugins:[DVIDER,ChartDataLabels]
   });
 }
 
