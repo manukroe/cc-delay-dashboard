@@ -159,10 +159,58 @@ const RP={
 
 const ML=['Oct','Nov','Dec','Jan','Feb','Mar','Apr'];
 const MONTHS=['2025-10-01','2025-11-01','2025-12-01','2026-01-01','2026-02-01','2026-03-01','2026-04-01'];
-const WL=['Mar 9','Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27'];
-const WEEKS=['2026-03-09','2026-03-16','2026-03-23','2026-03-30','2026-04-06','2026-04-13','2026-04-20','2026-04-27'];
+const WL=['Apr 6','Apr 13','Apr 20','Apr 27'];
+const WEEKS=['2026-04-06','2026-04-13','2026-04-20','2026-04-27'];
 const ALL=[...ML,...WL];
-const NM=7;
+const NM=7; // 7 monthly labels
+
+// ── DELAY DATA (full calendar months from DWH) ────────────────────────────────
+const MDATA={
+  Fleet:{
+    'Invoice not paid':          [ 23,155,126,138,136, 70, 23],
+    'Transport Delay OEM/Dealer':[ 113,108,161, 99, 49, 13,  3],
+    'ZB II shipping delayed':    [  72, 48, 63, 81, 24, 58, 16],
+    'Production delay':          [  63, 43, 60, 96, 22, 14, 19],
+    'Transport damage OEM/Dealer':[59, 31, 48, 50, 29, 17,  5],
+    'Quality block/recall':      [  44, 14, 22, 36, 20,  3,  7],
+    'KBA special approval missing':[ 0,  0,  0, 19, 18, 33,  6],
+    'Missing Approval OEM':      [   0,  0,  0,  0, 13, 36, 13],
+    'Wrong ETA':                 [   0,  0,  0, 15, 11,  9, 39],
+    'PDI material missing OEM/Dealer':[51,8,3,11,22, 0,  3],
+    'Tires missing OEM/Dealer':  [  12,  8, 38,111, 61,  0,  5],
+  },
+  Infleeting:{
+    'PDI delayed compound':      [116, 37,109,164,142, 73, 32],
+    'Car malfunctioning':        [ 40, 38, 45, 52, 50, 43, 40],
+    'Compound damage':           [ 51, 37, 31, 28, 45, 50, 56],
+    'SA number missing':         [ 67, 34,  7, 28, 40, 48, 33],
+    'Car not ready for pickup':  [  0,  0,  1, 33,103, 41, 18],
+    'Tires missing FINN':        [ 44, 20, 52, 52, 19, 20,  1],
+    'Registration process delayed':[44,14, 25, 26, 25, 92, 30],
+    'License plates missing':    [ 30,  9,  8,  9, 19,167, 47],
+    'Transport delay FINN':      [  4,  1,  4, 48, 23, 34, 17],
+    'Tech/data issue at compound':[22,15, 18,  9,  2,  9, 17],
+    'FINN finish incomplete':    [ 46, 29, 21,  9,  1,  0,  0],
+  },
+  Tech:{
+    'General internal Tech error':[ 16, 44, 64, 93,119,159,264],
+    'Weekend/Holiday':            [  3,  4,  0, 92,  2,  0,  7],
+    'Ride not posted':            [  0,  0,  0,  0, 16, 44, 82],
+    'Readout Error':              [  0,  0,  0,  0,  3, 19,  6],
+  },
+  Transport:{
+    'Short notice driver cancel.':[102, 28, 54,116, 52, 29, 47],
+    'Delivery Breakdown/Damage':  [ 12, 27, 24, 17, 15, 29, 24],
+    'No driver found':            [ 21,  6, 17, 13,  8,  1,  3],
+    'Distance too long':          [  0,  0,  0,  0,  0,  0, 10],
+    'Peak shaving':               [  0,  0,  0,  0,  0,  0,  6],
+  },
+  Other:{
+    'Pickup too soon':            [  0,  0,  0,  0,123,144,134],
+    'Unspecified':                [  9,  8, 32, 75, 14,  8,  6],
+    'Other':                      [  0, 69,  0,  0,  0,  2,  0],
+  },
+};
 
 // Period completion
 function isWeekComplete(w){
@@ -192,76 +240,41 @@ const HSR_M=[68.0,68.4,67.1,69.2,70.8,70.5,69.8]; // Oct–Apr
 
 // ── NOTICE PERIOD (real DWH data, total_days_negative < 0 = late) ─────────────
 // Monthly Oct–Mar
-const NP_M={
-  labels:['Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
-  late: [235,115,189,346,242, 56,149],
-  short:[ 66, 23, 56, 63, 59,  4, 35],
-  long: [751,654,798,1070,931,297,767],
-};
-// Weekly Mar 9 – Apr 27 (complete weeks only)
-const NP_W={
-  late: [47,32,21,40,32,37,41,39],
-  short:[ 9, 9, 4, 3,18, 2, 0,15],
-  long: [290,277,234,167,227,264,173,131],
+// Notice Period: DATE_DIFF(previous_handover_date, day_shifted, DAY)
+// Late = <1 day, Short = 1–3 days, Normal = >3 days
+// Split: FINN-initiated (is_finn_shift=TRUE) vs Customer-initiated (is_finn_shift=FALSE)
+const NP={
+  finn:{
+    monthly:{
+      labels:['Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+      late:  [265,137,181,278,311, 67,274],
+      short: [423,243,431,422,406,121,332],
+      normal:[748,585,801,1415,889,204,575],
+    },
+    weekly:{
+      late:  [102,141,100, 67],
+      short: [ 88, 71, 56, 88],
+      normal:[131,159,189,119],
+    },
+  },
+  customer:{
+    monthly:{
+      labels:['Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+      late:  [126, 58, 57, 77, 93, 40,274],
+      short: [336,135,125,210,283, 58,282],
+      normal:[1168,939,1149,1468,1892,422,2385],
+    },
+    weekly:{
+      late:  [ 20, 23, 17, 22],
+      short: [ 60, 71, 56, 48],
+      normal:[656,626,431,402],
+    },
+  },
 };
 
 // ── DELAY DATA ────────────────────────────────────────────────────────────────
-const MDATA={
-  Fleet:{
-    'Invoice not paid':         [155,155,126,138,136,44, 23],
-    'Transport Delay OEM/Dealer':[108,108,161, 99, 49, 3,  3],
-    'ZB II shipping delayed':   [ 48, 48, 63, 81, 24,30, 16],
-    'Production delay':         [ 43, 43, 60, 96, 22,11, 19],
-    'Transport damage OEM/Dealer':[31,31, 48, 50, 29, 8,  5],
-    'Quality block/recall':     [ 14, 14, 22, 36, 20, 2,  7],
-    'KBA special approval missing':[0,0,  0, 19, 18, 9,  6],
-    'Missing Approval OEM':     [  0,  0,  0,  0, 13,24, 13],
-    'Wrong ETA':                [  0,  0,  0, 15, 11, 1, 39],
-  },
-  Infleeting:{
-    'PDI delayed compound':     [ 37, 37,109,164,142,28, 32],
-    'Car malfunctioning':       [ 38, 38, 45, 52, 50,10, 40],
-    'Compound damage':          [ 37, 37, 31, 28, 45, 8, 56],
-    'SA number missing':        [ 34, 34,  7, 28, 40, 9, 33],
-    'Car not ready for pickup': [  0,  0,  1, 33,103,25, 18],
-    'Tires missing FINN':       [ 20, 20, 52, 52, 19,12,  1],
-    'Registration process delayed':[14,14,25, 26, 25,14, 30],
-    'License plates missing':   [  9,  9,  8,  9, 19, 3, 47],
-    'Transport delay FINN':     [  1,  1,  4, 48, 23, 2, 17],
-    'Tech/data issue at compound':[15,15, 18,  9,  2, 1, 17],
-  },
-  Tech:{
-    'General internal Tech error':[44,44,64,93,119,27,264],
-    'Weekend/Holiday':          [  4,  4,  0, 92,  2, 0,  7],
-    'Ride not posted':          [  0,  0,  0,  0, 16, 9, 82],
-    'Readout Error':            [  0,  0,  0,  0,  3,12,  6],
-  },
-  Transport:{
-    'Short notice driver cancel.':[28,28,54,116,52, 4, 47],
-    'Delivery Breakdown/Damage':[ 27, 27, 24, 17, 15, 2, 24],
-    'No driver found':          [  6,  6, 17, 13,  8, 0,  3],
-    'Distance too long':        [  0,  0,  0,  0,  0, 0, 10],
-    'Peak shaving':             [  0,  0,  0,  0,  0, 0,  6],
-  },
-  Other:{
-    'Pickup too soon':          [  0,  0,  0,  0,123,40,134],
-    'Unspecified':              [  8,  8, 32, 75, 14, 2,  6],
-  },
-};
 
 const WR=[
-  {w:'2026-03-09',t:'Fleet',r:'Invoice not paid',c:19},{w:'2026-03-09',t:'Fleet',r:'ZB II shipping delayed',c:10},{w:'2026-03-09',t:'Fleet',r:'KBA special approval missing',c:7},{w:'2026-03-09',t:'Fleet',r:'Missing Approval OEM',c:7},{w:'2026-03-09',t:'Fleet',r:'Transport damage OEM/Dealer',c:6},
-  {w:'2026-03-09',t:'Infleeting',r:'License plates missing',c:61},{w:'2026-03-09',t:'Infleeting',r:'Registration process delayed',c:58},{w:'2026-03-09',t:'Infleeting',r:'PDI delayed compound',c:21},{w:'2026-03-09',t:'Infleeting',r:'SA number missing',c:14},{w:'2026-03-09',t:'Infleeting',r:'Compound damage',c:9},
-  {w:'2026-03-09',t:'Other',r:'Pickup too soon',c:47},{w:'2026-03-09',t:'Tech',r:'General internal Tech error',c:22},{w:'2026-03-09',t:'Tech',r:'Ride not posted',c:9},{w:'2026-03-09',t:'Tech',r:'Readout Error',c:4},{w:'2026-03-09',t:'Transport',r:'Short notice driver cancel.',c:10},{w:'2026-03-09',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
-  {w:'2026-03-16',t:'Fleet',r:'KBA special approval missing',c:17},{w:'2026-03-16',t:'Fleet',r:'ZB II shipping delayed',c:12},{w:'2026-03-16',t:'Fleet',r:'Production delay',c:5},{w:'2026-03-16',t:'Fleet',r:'Invoice not paid',c:4},
-  {w:'2026-03-16',t:'Infleeting',r:'License plates missing',c:92},{w:'2026-03-16',t:'Infleeting',r:'PDI delayed compound',c:13},{w:'2026-03-16',t:'Infleeting',r:'Car malfunctioning',c:11},{w:'2026-03-16',t:'Infleeting',r:'Compound damage',c:10},{w:'2026-03-16',t:'Infleeting',r:'SA number missing',c:7},
-  {w:'2026-03-16',t:'Other',r:'Pickup too soon',c:19},{w:'2026-03-16',t:'Tech',r:'General internal Tech error',c:41},{w:'2026-03-16',t:'Tech',r:'Ride not posted',c:11},{w:'2026-03-16',t:'Transport',r:'Delivery Breakdown/Damage',c:10},{w:'2026-03-16',t:'Transport',r:'Short notice driver cancel.',c:6},
-  {w:'2026-03-23',t:'Fleet',r:'ZB II shipping delayed',c:5},{w:'2026-03-23',t:'Fleet',r:'KBA special approval missing',c:2},{w:'2026-03-23',t:'Fleet',r:'Wrong ETA',c:2},
-  {w:'2026-03-23',t:'Infleeting',r:'Compound damage',c:24},{w:'2026-03-23',t:'Infleeting',r:'License plates missing',c:20},{w:'2026-03-23',t:'Infleeting',r:'Car malfunctioning',c:16},{w:'2026-03-23',t:'Infleeting',r:'SA number missing',c:16},{w:'2026-03-23',t:'Infleeting',r:'PDI delayed compound',c:12},{w:'2026-03-23',t:'Infleeting',r:'Tech/data issue at compound',c:5},
-  {w:'2026-03-23',t:'Other',r:'Pickup too soon',c:30},{w:'2026-03-23',t:'Tech',r:'General internal Tech error',c:48},{w:'2026-03-23',t:'Tech',r:'Ride not posted',c:11},{w:'2026-03-23',t:'Tech',r:'Readout Error',c:3},{w:'2026-03-23',t:'Transport',r:'Delivery Breakdown/Damage',c:12},{w:'2026-03-23',t:'Transport',r:'Short notice driver cancel.',c:4},
-  {w:'2026-03-30',t:'Fleet',r:'KBA special approval missing',c:8},{w:'2026-03-30',t:'Fleet',r:'Wrong ETA',c:7},{w:'2026-03-30',t:'Fleet',r:'Missing Approval OEM',c:5},{w:'2026-03-30',t:'Fleet',r:'Invoice not paid',c:3},
-  {w:'2026-03-30',t:'Infleeting',r:'Compound damage',c:16},{w:'2026-03-30',t:'Infleeting',r:'Registration process delayed',c:13},{w:'2026-03-30',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-03-30',t:'Infleeting',r:'PDI delayed compound',c:9},{w:'2026-03-30',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-03-30',t:'Infleeting',r:'Tech/data issue at compound',c:6},
-  {w:'2026-03-30',t:'Other',r:'Pickup too soon',c:33},{w:'2026-03-30',t:'Tech',r:'General internal Tech error',c:46},{w:'2026-03-30',t:'Tech',r:'Ride not posted',c:7},{w:'2026-03-30',t:'Tech',r:'Readout Error',c:2},{w:'2026-03-30',t:'Transport',r:'Short notice driver cancel.',c:9},{w:'2026-03-30',t:'Transport',r:'Delivery Breakdown/Damage',c:2},
   {w:'2026-04-06',t:'Fleet',r:'Invoice not paid',c:22},{w:'2026-04-06',t:'Fleet',r:'Production delay',c:3},{w:'2026-04-06',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-06',t:'Fleet',r:'ZB II shipping delayed',c:2},
   {w:'2026-04-06',t:'Infleeting',r:'PDI delayed compound',c:17},{w:'2026-04-06',t:'Infleeting',r:'Compound damage',c:15},{w:'2026-04-06',t:'Infleeting',r:'License plates missing',c:9},{w:'2026-04-06',t:'Infleeting',r:'Car malfunctioning',c:9},{w:'2026-04-06',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-04-06',t:'Infleeting',r:'Tech/data issue at compound',c:4},
   {w:'2026-04-06',t:'Other',r:'Pickup too soon',c:56},{w:'2026-04-06',t:'Tech',r:'General internal Tech error',c:60},{w:'2026-04-06',t:'Tech',r:'Ride not posted',c:28},{w:'2026-04-06',t:'Tech',r:'Weekend/Holiday',c:6},{w:'2026-04-06',t:'Transport',r:'Short notice driver cancel.',c:4},{w:'2026-04-06',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
@@ -277,16 +290,12 @@ const WR=[
 ];
 
 const CR=[
-  {w:'2026-03-09',r:'Handover date change requested',c:143},{w:'2026-03-09',r:'Data validation missing',c:7},{w:'2026-03-09',r:'Deposit payment delayed',c:5},
-  {w:'2026-03-16',r:'Handover date change requested',c:309},{w:'2026-03-16',r:'Deposit payment delayed',c:24},{w:'2026-03-16',r:'Data validation missing',c:11},{w:'2026-03-16',r:'SWAP Coordination',c:6},
-  {w:'2026-03-23',r:'Handover date change requested',c:264},{w:'2026-03-23',r:'Deposit payment delayed',c:20},{w:'2026-03-23',r:'Data validation missing',c:7},
-  {w:'2026-03-30',r:'Handover date change requested',c:261},{w:'2026-03-30',r:'Deposit payment delayed',c:13},{w:'2026-03-30',r:'SWAP Coordination',c:10},{w:'2026-03-30',r:'Data validation missing',c:2},
   {w:'2026-04-06',r:'Handover date change requested',c:262},{w:'2026-04-06',r:'Data validation missing',c:54},{w:'2026-04-06',r:'Deposit payment delayed',c:25},{w:'2026-04-06',r:'SWAP Coordination',c:4},
   {w:'2026-04-13',r:'Handover date change requested',c:302},{w:'2026-04-13',r:'Deposit payment delayed',c:29},{w:'2026-04-13',r:'SWAP Coordination',c:12},{w:'2026-04-13',r:'Data validation missing',c:9},
   {w:'2026-04-20',r:'Handover date change requested',c:245},{w:'2026-04-20',r:'Deposit payment delayed',c:30},{w:'2026-04-20',r:'Data validation missing',c:12},
   {w:'2026-04-27',r:'Handover date change requested',c:334},{w:'2026-04-27',r:'Deposit payment delayed',c:18},{w:'2026-04-27',r:'SWAP Coordination',c:2},
 ];
-const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[175,10,20,8],[290,25,28,6]];
+const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[260,20,25,8],[290,25,28,6]];
 
 // ── INITIATIVES (detailed) ────────────────────────────────────────────────────
 const INITS={
@@ -464,10 +473,11 @@ const DVIDER={id:'dv',afterDraw(c){
 }};
 
 let CM=null,RM=null,NPC=null,HSRC=null,activeTab='Overall';
+Chart.register(ChartDataLabels);
 
 // ── CHART: Main stacked bar ───────────────────────────────────────────────────
 function buildMain(tab){
-  const ctx=document.getElementById('mc');if(!ctx)return;
+  const canvasEl=document.getElementById('mc');if(!canvasEl)return;
   if(CM){CM.destroy();CM=null;}
   const leg=document.getElementById('ml');leg.innerHTML='';
   const aidx=ALL.map((_,i)=>i);
@@ -480,8 +490,7 @@ function buildMain(tab){
     ds=[{label:tab,data:aidx.map(i=>at(i,tab)),backgroundColor:col,stack:'s'}];
     leg.innerHTML=`<span><span class="ldot" style="background:${col}"></span>${tab}</span>`;
   }
-  Chart.register(ChartDataLabels);
-  CM=new Chart(ctx,{
+  CM=new Chart(canvasEl,{
     type:'bar',
     data:{labels:ALL,datasets:ds},
     options:{
@@ -489,21 +498,21 @@ function buildMain(tab){
       plugins:{
         legend:{display:false},
         datalabels:{
-          display:(ctx)=>ctx.datasetIndex===ds.length-1,
+          display:function(dlCtx){return dlCtx.datasetIndex===ds.length-1;},
           anchor:'end',align:'end',
-          formatter:(val,ctx)=>{
-            const i=ctx.dataIndex;
+          formatter:function(val,dlCtx){
+            const i=dlCtx.dataIndex;
             const tot=ds.reduce((s,d)=>s+(d.data[i]||0),0);
-            return tot>0?tot:'';
+            return tot>0?String(tot):'';
           },
           color:'rgba(255,255,255,0.5)',font:{size:9},
         },
         tooltip:{mode:'index',intersect:false,callbacks:{
-          afterBody:items=>{const tot=items.reduce((s,i)=>s+i.parsed.y,0);return [`Total: ${tot}`];}
+          afterBody:function(items){const tot=items.reduce((s,item)=>s+item.parsed.y,0);return ['Total: '+tot];}
         }}
       },
       scales:{
-        x:{stacked:true,ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#777',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
+        x:{stacked:true,ticks:{font:{size:10},color:function(c){return c.index<NM?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
         y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}},
       }
     },
@@ -516,7 +525,7 @@ function buildReason(tab){
   const wrap=document.getElementById('rw');if(!wrap)return;
   if(tab==='Overall'||tab==='Customer'){wrap.style.display='none';return;}
   wrap.style.display='block';
-  const ctx=document.getElementById('rc');if(!ctx)return;
+  const canvasEl=document.getElementById('rc');if(!canvasEl)return;
   if(RM){RM.destroy();RM=null;}
   const pal=RP[tab],aidx=ALL.map((_,i)=>i);
   const rset=new Set();
@@ -538,72 +547,152 @@ function buildReason(tab){
   });
 }
 
-// ── CHART: Notice period stacked bar ─────────────────────────────────────────
-function buildNotice(){
-  const ctx=document.getElementById('nmc');if(!ctx)return;
+// ── CHART: Notice period stacked bar (tabbed) ─────────────────────────────────
+let activeNoticeTab='finn';
+function buildNotice(ntab){
+  ntab=ntab||activeNoticeTab;
+  activeNoticeTab=ntab;
+  const canvasEl=document.getElementById('nmc');if(!canvasEl)return;
   if(NPC){NPC.destroy();NPC=null;}
-  const mL=NP_M.labels,wL=WL,allL=[...mL,...wL],NML=mL.length;
-  const late=[...NP_M.late,...NP_W.late];
-  const short=[...NP_M.short,...NP_W.short];
-  const long=[...NP_M.long,...NP_W.long];
-  NPC=new Chart(ctx,{
+  const src=NP[ntab];
+  const mL=src.monthly.labels,allL=[...mL,...WL],NML=mL.length;
+  const lateD=[...src.monthly.late,...src.weekly.late];
+  const shortD=[...src.monthly.short,...src.weekly.short];
+  const normalD=[...src.monthly.normal,...src.weekly.normal];
+
+  // Update tab buttons
+  ['finn','customer'].forEach(function(t){
+    const btn=document.getElementById('ntab-'+t);
+    if(!btn)return;
+    const active=t===ntab;
+    const color=t==='finn'?'#378ADD':'#D4537E';
+    btn.style.background=active?('rgba('+(t==='finn'?'55,138,221':'212,83,126')+',0.15)'):'rgba(255,255,255,0.03)';
+    btn.style.borderColor=active?color:'rgba(255,255,255,0.1)';
+    btn.style.color=active?color:'#666';
+    btn.style.fontWeight=active?'600':'400';
+  });
+
+  const normalColor=ntab==='finn'?'#378ADD':'#D4537E';
+  NPC=new Chart(canvasEl,{
     type:'bar',
     data:{labels:allL,datasets:[
-      {label:'Late notice (<0 days)',data:late,backgroundColor:'#EF4444',stack:'n'},
-      {label:'Short notice (0–3 days)',data:short,backgroundColor:'#F59E0B',stack:'n'},
-      {label:'Long notice (≥4 days)',data:long,backgroundColor:'#378ADD',stack:'n'},
+      {label:'Late notice (<1 day)',data:lateD,backgroundColor:'#EF4444',stack:'n'},
+      {label:'Short notice (1–3 days)',data:shortD,backgroundColor:'#F59E0B',stack:'n'},
+      {label:'Normal notice (>3 days)',data:normalD,backgroundColor:normalColor,stack:'n'},
     ]},
     options:{
-      responsive:true,maintainAspectRatio:false,
+      responsive:true,
+      maintainAspectRatio:false,
       plugins:{
         legend:{display:false},
         datalabels:{
-          display:(ctx)=>ctx.datasetIndex===2,
-          anchor:'end',align:'end',
-          formatter:(val,ctx)=>{
-            const i=ctx.dataIndex;
-            const tot=late[i]+short[i]+long[i];
-            return tot>0?tot:'';
+          display:function(context){return context.datasetIndex===2;},
+          anchor:'end',
+          align:'end',
+          formatter:function(value,context){
+            const i=context.dataIndex;
+            const tot=lateD[i]+shortD[i]+normalD[i];
+            return tot>0?String(tot):'';
           },
-          color:'rgba(255,255,255,0.45)',font:{size:9},
+          color:'rgba(255,255,255,0.45)',
+          font:{size:9},
         },
-        tooltip:{mode:'index',intersect:false,callbacks:{
-          afterBody:items=>{const tot=items.reduce((s,i)=>s+i.parsed.y,0);return [`Total: ${tot}`];}
-        }}
+        tooltip:{
+          mode:'index',
+          intersect:false,
+          callbacks:{
+            title:function(items){
+              const i=items[0].dataIndex;
+              return i<NML?(allL[i]+' (monthly)'):(allL[i]+' (week)');
+            },
+            afterBody:function(items){
+              const tot=items.reduce(function(s,item){return s+item.parsed.y;},0);
+              const pctLate=tot>0?Math.round(lateD[items[0].dataIndex]/tot*100):0;
+              const pctShort=tot>0?Math.round(shortD[items[0].dataIndex]/tot*100):0;
+              return ['Total shifts: '+tot,'Late: '+pctLate+'% · Short: '+pctShort+'%'];
+            }
+          }
+        }
       },
       scales:{
-        x:{stacked:true,ticks:{font:{size:10},color:(c)=>c.index<NML?'#3a3a3a':'#777',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
+        x:{stacked:true,ticks:{font:{size:10},color:function(c){return c.index<NML?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
         y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}},
       }
     },
-    plugins:[{id:'dvN',afterDraw(c){
-      const ctx=c.ctx,x=c.scales.x,y=c.scales.y;
-      const px=(x.getPixelForValue(NML-1)+x.getPixelForValue(NML))/2;
-      ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1.5;
-      ctx.beginPath();ctx.moveTo(px,y.top);ctx.lineTo(px,y.bottom);ctx.stroke();ctx.restore();
-    }},ChartDataLabels]
+    plugins:[{
+      id:'dvN',
+      afterDraw:function(chart){
+        const c2=chart.ctx;
+        const xScale=chart.scales.x;
+        const yScale=chart.scales.y;
+        const px=(xScale.getPixelForValue(NML-1)+xScale.getPixelForValue(NML))/2;
+        c2.save();
+        c2.setLineDash([5,5]);
+        c2.strokeStyle='rgba(255,255,255,0.2)';
+        c2.lineWidth=1.5;
+        c2.beginPath();
+        c2.moveTo(px,yScale.top);
+        c2.lineTo(px,yScale.bottom);
+        c2.stroke();
+        c2.fillStyle='rgba(255,255,255,0.25)';
+        c2.font='9px DM Sans';
+        c2.fillText('monthly \u2190 | \u2192 weekly',px-46,yScale.top-6);
+        c2.restore();
+      }
+    }]
   });
 }
 
 // ── CHART: HSR ───────────────────────────────────────────────────────────────
 function buildHSR(){
-  const ctx=document.getElementById('hsrc');if(!ctx)return;
+  const canvasEl=document.getElementById('hsrc');if(!canvasEl)return;
   if(HSRC){HSRC.destroy();HSRC=null;}
-  const mD=HSR_M,wD=WEEKS.map(w=>HSR_W[w]??null);
-  HSRC=new Chart(ctx,{
+  const mD=HSR_M;
+  const wD=WEEKS.map(function(w){return HSR_W[w]!==undefined?HSR_W[w]:null;});
+  const allData=[...mD,...wD];
+  HSRC=new Chart(canvasEl,{
     type:'line',
     data:{labels:ALL,datasets:[
-      {label:'HSR %',data:[...mD,...wD],borderColor:'#4ade80',backgroundColor:'rgba(74,222,128,0.08)',tension:.35,borderWidth:2.5,fill:true,
-       pointRadius:ALL.map((_,i)=>i<NM?3:(wD[i-NM]===null?0:5)),pointHoverRadius:7,spanGaps:false},
-      {label:'Target 70%',data:ALL.map(()=>70),borderColor:'rgba(255,255,255,0.12)',borderDash:[4,4],borderWidth:1,pointRadius:0,datalabels:{display:false}},
+      {
+        label:'HSR %',
+        data:allData,
+        borderColor:'#4ade80',
+        backgroundColor:'rgba(74,222,128,0.08)',
+        tension:.35,
+        borderWidth:2.5,
+        fill:true,
+        pointRadius:ALL.map(function(_,i){return i<NM?3:(wD[i-NM]===null?0:5);}),
+        pointHoverRadius:7,
+        spanGaps:false,
+      },
+      {
+        label:'Target 70%',
+        data:ALL.map(function(){return 70;}),
+        borderColor:'rgba(255,255,255,0.12)',
+        borderDash:[4,4],
+        borderWidth:1,
+        pointRadius:0,
+        pointHoverRadius:0,
+      },
     ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},datalabels:{display:false},tooltip:{callbacks:{label:i=>`${i.dataset.label}: ${i.parsed.y}%`}}},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        datalabels:{display:false},
+        tooltip:{
+          callbacks:{
+            label:function(item){return item.dataset.label+': '+item.parsed.y+'%';}
+          }
+        }
+      },
       scales:{
-        x:{ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#777',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
-        y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}},
+        x:{ticks:{font:{size:10},color:function(c){return c.index<NM?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
+        y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:function(v){return v+'%';}},grid:{color:'rgba(255,255,255,0.05)'}},
       }
-    },plugins:[DVIDER,ChartDataLabels]
+    },
+    plugins:[DVIDER]
   });
 }
 
@@ -719,13 +808,15 @@ function render(){
     <br><strong>Period logic</strong> Monthly = full calendar month. Weekly = Mon–Sun. Deltas use last complete ↔ prev complete period only.`;
 
   const noticeBasis=`<strong>Filters applied</strong>
-    <span class="tag">delay_days > 0</span><span class="tag">is_silent_delay = FALSE</span><span class="tag">is_finn_shift = TRUE</span><span class="tag">delay_responsible_team ≠ 'Non-Ops Delays'</span>
-    <br><strong>Note</strong> Notice period applies to all FINN-caused delays regardless of active tab filter.
+    <span class="tag">is_silent_delay = FALSE</span><span class="tag">All teams incl. Customer (Non-Ops Delays)</span>
+    <br><strong>Note</strong> Covers all customer-facing shifts regardless of active tab. Unit = shifts (not deals — one deal can have multiple shifts).
+    <br><strong>Calculation</strong> notice_days = DATE_DIFF(previous_handover_date, day_shifted, DAY)
+    <br>= days between when the shift was created and the date that was previously communicated to the customer
     <br><strong>Definitions</strong>
-    <span class="tag" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#EF4444">Late notice</span> total_days_negative &lt; 0 → shift created <em>after</em> original handover date (customer already overdue)
-    <span class="tag" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#F59E0B">Short notice</span> total_days_positive 0–3 AND total_days_negative = 0 → communicated 0–3 days before handover
-    <span class="tag" style="background:rgba(55,138,221,0.15);border-color:rgba(55,138,221,0.4);color:#378ADD">Long notice</span> total_days_positive ≥ 4 → communicated 4+ days in advance (customer can plan)
-    <br><strong>Source</strong> fact_car_handover_event · columns: total_days_negative, total_days_positive`;
+    <span class="tag" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#EF4444">Late notice</span> notice_days &lt; 1 → shift on same day or after the communicated handover date
+    <span class="tag" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#F59E0B">Short notice</span> notice_days 1–3 → customer informed 1–3 days before handover
+    <span class="tag" style="background:rgba(55,138,221,0.15);border-color:rgba(55,138,221,0.4);color:#378ADD">Normal notice</span> notice_days &gt; 3 → customer has more than 3 days to adjust
+    <br><strong>Source</strong> fact_car_handover_event · columns: previous_handover_date, day_shifted`;
 
   const hsrBasis=`<strong>Filters applied</strong>
     <span class="tag">touchpoint_type_id = 'handover_success_rate'</span>
@@ -784,11 +875,15 @@ function render(){
 
     <div class="cbox">
       <div class="ctitle">Delay notice period</div>
+      <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+        <button id="ntab-finn" class="tab" onclick="buildNotice('finn')" style="border-color:#378ADD;color:#378ADD;background:rgba(55,138,221,0.15);font-weight:600;">FINN-initiated delays</button>
+        <button id="ntab-customer" class="tab" onclick="buildNotice('customer')" style="">Customer-initiated delays</button>
+      </div>
       ${dbasisToggle('db3',noticeBasis)}
       <div class="nleg">
-        <span><span class="ldot" style="background:#EF4444"></span>Late notice (&lt;0 days – already overdue)</span>
-        <span><span class="ldot" style="background:#F59E0B"></span>Short notice (0–3 days)</span>
-        <span><span class="ldot" style="background:#378ADD"></span>Long notice (≥4 days)</span>
+        <span><span class="ldot" style="background:#EF4444"></span>Late notice (&lt;1 day – overdue or same day)</span>
+        <span><span class="ldot" style="background:#F59E0B"></span>Short notice (1–3 days)</span>
+        <span><span class="ldot" style="background:#378ADD"></span>Normal notice (&gt;3 days)</span>
       </div>
       <div style="position:relative;width:100%;height:220px;"><canvas id="nmc"></canvas></div>
     </div>
@@ -815,10 +910,16 @@ function render(){
     <div class="footer">fact_car_handover_event + fact_clsr_touchpoints · delay_days &gt; 0 · non-silent delays · Updated ${STAND}</div>
   `;
 
-  buildMain(tab);buildReason(tab);buildNotice();buildHSR();
+  buildMain(tab);
+  buildReason(tab);
+  setTimeout(function(){
+    buildNotice(activeNoticeTab);
+    buildHSR();
+  },0);
 }
 
 window.setTab=function(t){activeTab=t;render();};
+window.buildNotice=function(t){buildNotice(t);};
 if(sessionStorage.getItem('cca')==='1') render();
 </script>
 </body>
