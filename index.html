@@ -164,55 +164,7 @@ const WEEKS=['2026-04-06','2026-04-13','2026-04-20','2026-04-27'];
 const ALL=[...ML,...WL];
 const NM=7; // 7 monthly labels
 
-// ── DELAY DATA (full calendar months from DWH) ────────────────────────────────
-const MDATA={
-  Fleet:{
-    'Invoice not paid':          [ 23,155,126,138,136, 70, 23],
-    'Transport Delay OEM/Dealer':[ 113,108,161, 99, 49, 13,  3],
-    'ZB II shipping delayed':    [  72, 48, 63, 81, 24, 58, 16],
-    'Production delay':          [  63, 43, 60, 96, 22, 14, 19],
-    'Transport damage OEM/Dealer':[59, 31, 48, 50, 29, 17,  5],
-    'Quality block/recall':      [  44, 14, 22, 36, 20,  3,  7],
-    'KBA special approval missing':[ 0,  0,  0, 19, 18, 33,  6],
-    'Missing Approval OEM':      [   0,  0,  0,  0, 13, 36, 13],
-    'Wrong ETA':                 [   0,  0,  0, 15, 11,  9, 39],
-    'PDI material missing OEM/Dealer':[51,8,3,11,22, 0,  3],
-    'Tires missing OEM/Dealer':  [  12,  8, 38,111, 61,  0,  5],
-  },
-  Infleeting:{
-    'PDI delayed compound':      [116, 37,109,164,142, 73, 32],
-    'Car malfunctioning':        [ 40, 38, 45, 52, 50, 43, 40],
-    'Compound damage':           [ 51, 37, 31, 28, 45, 50, 56],
-    'SA number missing':         [ 67, 34,  7, 28, 40, 48, 33],
-    'Car not ready for pickup':  [  0,  0,  1, 33,103, 41, 18],
-    'Tires missing FINN':        [ 44, 20, 52, 52, 19, 20,  1],
-    'Registration process delayed':[44,14, 25, 26, 25, 92, 30],
-    'License plates missing':    [ 30,  9,  8,  9, 19,167, 47],
-    'Transport delay FINN':      [  4,  1,  4, 48, 23, 34, 17],
-    'Tech/data issue at compound':[22,15, 18,  9,  2,  9, 17],
-    'FINN finish incomplete':    [ 46, 29, 21,  9,  1,  0,  0],
-  },
-  Tech:{
-    'General internal Tech error':[ 16, 44, 64, 93,119,159,264],
-    'Weekend/Holiday':            [  3,  4,  0, 92,  2,  0,  7],
-    'Ride not posted':            [  0,  0,  0,  0, 16, 44, 82],
-    'Readout Error':              [  0,  0,  0,  0,  3, 19,  6],
-  },
-  Transport:{
-    'Short notice driver cancel.':[102, 28, 54,116, 52, 29, 47],
-    'Delivery Breakdown/Damage':  [ 12, 27, 24, 17, 15, 29, 24],
-    'No driver found':            [ 21,  6, 17, 13,  8,  1,  3],
-    'Distance too long':          [  0,  0,  0,  0,  0,  0, 10],
-    'Peak shaving':               [  0,  0,  0,  0,  0,  0,  6],
-  },
-  Other:{
-    'Pickup too soon':            [  0,  0,  0,  0,123,144,134],
-    'Unspecified':                [  9,  8, 32, 75, 14,  8,  6],
-    'Other':                      [  0, 69,  0,  0,  0,  2,  0],
-  },
-};
-
-// Period completion
+// ── PERIOD COMPLETION LOGIC ───────────────────────────────────────────────────
 function isWeekComplete(w){
   const mon=new Date(w),sun=new Date(mon);sun.setDate(mon.getDate()+6);return TODAY>sun;
 }
@@ -220,29 +172,114 @@ function isMonthComplete(m){
   const d=new Date(m);return TODAY.getFullYear()>d.getFullYear()||(TODAY.getFullYear()===d.getFullYear()&&TODAY.getMonth()>d.getMonth());
 }
 const CW=WEEKS.filter(w=>isWeekComplete(w));
-const LCW=CW[CW.length-1]; // last complete week = Apr 27
-const PCW=CW[CW.length-2]; // prev complete week = Apr 20
+const LCW=CW[CW.length-1];    // last complete week  = Apr 27
+const PCW=CW[CW.length-2];    // prev complete week  = Apr 20
 const CM2=MONTHS.filter(m=>isMonthComplete(m));
-const LCMI=CM2.length-1; // last complete month idx = Mar (idx 5)
-const PCMI=CM2.length-2; // prev = Feb (idx 4)
+const LCMI=CM2.length-1;       // last complete month idx = Apr (6)
+const PCMI=CM2.length-2;       // prev complete month idx = Mar (5)
+
+// ── DELAY DATA (full calendar months from DWH) ────────────────────────────────
+const MDATA={
+  Fleet:{
+    'Transport Delay OEM/Dealer':[ 88, 73,120, 64, 36, 11,  0],
+    'ZB II shipping delayed':    [ 59, 39, 60, 75, 24, 46,  0],
+    'Invoice not paid':          [ 22,132, 90, 96, 81, 60, 17],
+    'Transport damage OEM/Dealer':[ 57, 26, 33, 44, 27, 15,  0],
+    'PDI material missing OEM/Dealer':[47,7,2,7,18,0,0],
+    'Quality block/recall':      [ 38, 13, 17, 14, 15,  2,  7],
+    'Production delay':          [ 28, 19, 17, 44,  8, 10,  4],
+    'KBA special approval missing':[0,  0,  0, 19, 14, 28,  6],
+    'Missing Approval OEM':      [  0,  0,  0,  0, 13, 36,  9],
+    'Wrong ETA':                 [  0,  0,  0, 14, 10,  6, 20],
+    'Tires missing OEM/Dealer':  [ 12,  7, 34, 89, 55,  0,  2],
+  },
+  Infleeting:{
+    'PDI delayed compound':      [ 99, 31,104,141,128, 65, 24],
+    'Car malfunctioning':        [ 36, 32, 43, 44, 41, 38, 30],
+    'Compound damage':           [ 50, 32, 26, 25, 39, 43, 46],
+    'SA number missing':         [ 63, 33,  7, 24, 33, 45, 28],
+    'Car not ready for pickup':  [  0,  0,  1, 31, 97, 41, 20],
+    'Tires missing FINN':        [ 43, 17, 46, 45, 17, 19,  1],
+    'Registration process delayed':[36,13,23,22,14,86,22],
+    'License plates missing':    [ 29,  8,  8,  9, 19,166, 44],
+    'Transport delay FINN':      [  2,  1,  4, 42, 16, 29,  9],
+    'Tech/data issue at compound':[22,13,17,  9,  2,  9, 15],
+    'FINN finish incomplete':    [ 44, 27, 18,  9,  1,  0,  0],
+  },
+  Tech:{
+    'General internal Tech error':[ 14, 42, 57, 83,110,149,267],
+    'Weekend/Holiday':            [  3,  4,  0, 77,  2,  0,  7],
+    'Ride not posted':            [  0,  0,  0,  0, 16, 43, 72],
+    'Readout Error':              [  0,  0,  0,  0,  3, 19,  6],
+  },
+  Transport:{
+    'Short notice driver cancel.':[102, 28, 54,116, 52, 29, 47],
+    'Delivery Breakdown/Damage':  [ 12, 27, 24, 17, 15, 28, 24],
+    'No driver found':            [ 21,  6, 17, 13,  8,  1,  3],
+    'Distance too long':          [  0,  0,  0,  0,  0,  0, 10],
+    'Peak shaving':               [  0,  0,  0,  0,  0,  0,  6],
+  },
+  Other:{
+    'Pickup too soon':            [  0,  0,  0,  0,123,144,125],
+    'Unspecified':                [  9,  8, 30, 74, 14,  7,  5],
+    'Other':                      [  0,  0, 68, 20,  1,  2,  0],
+  },
+};
+const WR=[
+  // Week Mar 30 (corrected: INNER JOIN delivery_date IS NOT NULL)
+  {w:'2026-03-30',t:'Fleet',r:'KBA special approval missing',c:6},{w:'2026-03-30',t:'Fleet',r:'Missing Approval OEM',c:5},{w:'2026-03-30',t:'Fleet',r:'Tires missing OEM/Dealer',c:5},{w:'2026-03-30',t:'Fleet',r:'Wrong ETA',c:5},{w:'2026-03-30',t:'Fleet',r:'Transport damage OEM/Dealer',c:3},{w:'2026-03-30',t:'Fleet',r:'Wrong Car Creation',c:1},{w:'2026-03-30',t:'Fleet',r:'Incorrect registration type',c:1},{w:'2026-03-30',t:'Fleet',r:'Invoice not paid',c:1},
+  {w:'2026-03-30',t:'Infleeting',r:'Compound damage',c:14},{w:'2026-03-30',t:'Infleeting',r:'Registration process delayed',c:13},{w:'2026-03-30',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-03-30',t:'Infleeting',r:'PDI delayed compound',c:8},{w:'2026-03-30',t:'Infleeting',r:'Tech/data issue at compound',c:6},{w:'2026-03-30',t:'Infleeting',r:'Transport delay FINN',c:5},{w:'2026-03-30',t:'Infleeting',r:'SA number missing',c:5},{w:'2026-03-30',t:'Infleeting',r:'Car not ready for pickup',c:4},{w:'2026-03-30',t:'Infleeting',r:'License plates missing',c:3},{w:'2026-03-30',t:'Infleeting',r:'Car not found at compound',c:2},{w:'2026-03-30',t:'Infleeting',r:'Wrong car location',c:1},{w:'2026-03-30',t:'Infleeting',r:'Tire change delayed',c:1},
+  {w:'2026-03-30',t:'Other',r:'Pickup too soon',c:33},{w:'2026-03-30',t:'Other',r:'Unspecified',c:1},
+  {w:'2026-03-30',t:'Tech',r:'General internal Tech error',c:42},{w:'2026-03-30',t:'Tech',r:'Ride not posted',c:7},{w:'2026-03-30',t:'Tech',r:'Readout Error',c:2},
+  {w:'2026-03-30',t:'Transport',r:'Short notice driver cancel.',c:9},{w:'2026-03-30',t:'Transport',r:'Delivery Breakdown/Damage',c:2},
+  // Week Apr 6
+  {w:'2026-04-06',t:'Fleet',r:'Invoice not paid',c:12},{w:'2026-04-06',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-06',t:'Fleet',r:'ZB II shipping delayed',c:1},{w:'2026-04-06',t:'Fleet',r:'Quality block/recall',c:1},{w:'2026-04-06',t:'Fleet',r:'Production delay',c:1},
+  {w:'2026-04-06',t:'Infleeting',r:'PDI delayed compound',c:17},{w:'2026-04-06',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-06',t:'Infleeting',r:'Car malfunctioning',c:9},{w:'2026-04-06',t:'Infleeting',r:'License plates missing',c:9},{w:'2026-04-06',t:'Infleeting',r:'License plates to wrong address',c:8},{w:'2026-04-06',t:'Infleeting',r:'Transport delay FINN',c:6},{w:'2026-04-06',t:'Infleeting',r:'Car not ready for pickup',c:6},{w:'2026-04-06',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-04-06',t:'Infleeting',r:'Registration process delayed',c:5},{w:'2026-04-06',t:'Infleeting',r:'Tech/data issue at compound',c:4},{w:'2026-04-06',t:'Infleeting',r:'Tire change delayed',c:1},{w:'2026-04-06',t:'Infleeting',r:'Called-off too late',c:1},
+  {w:'2026-04-06',t:'Other',r:'Pickup too soon',c:56},{w:'2026-04-06',t:'Other',r:'Unspecified',c:3},{w:'2026-04-06',t:'Other',r:'Pickup date in the past',c:1},
+  {w:'2026-04-06',t:'Tech',r:'General internal Tech error',c:60},{w:'2026-04-06',t:'Tech',r:'Ride not posted',c:28},{w:'2026-04-06',t:'Tech',r:'Weekend/Holiday',c:6},
+  {w:'2026-04-06',t:'Transport',r:'Short notice driver cancel.',c:4},{w:'2026-04-06',t:'Transport',r:'Delivery Breakdown/Damage',c:4},{w:'2026-04-06',t:'Transport',r:'No driver found',c:1},
+  // Week Apr 13
+  {w:'2026-04-13',t:'Fleet',r:'Wrong ETA',c:24},{w:'2026-04-13',t:'Fleet',r:'Invoice not received',c:4},{w:'2026-04-13',t:'Fleet',r:'Transport Delay OEM/Dealer',c:2},{w:'2026-04-13',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-13',t:'Fleet',r:'Transport damage OEM/Dealer',c:1},{w:'2026-04-13',t:'Fleet',r:'Production delay',c:1},{w:'2026-04-13',t:'Fleet',r:'KBA special approval missing',c:1},
+  {w:'2026-04-13',t:'Infleeting',r:'License plates missing',c:25},{w:'2026-04-13',t:'Infleeting',r:'Compound damage',c:12},{w:'2026-04-13',t:'Infleeting',r:'Car malfunctioning',c:8},{w:'2026-04-13',t:'Infleeting',r:'Car not ready for pickup',c:4},{w:'2026-04-13',t:'Infleeting',r:'Car not found at compound',c:3},{w:'2026-04-13',t:'Infleeting',r:'Registration process delayed',c:3},{w:'2026-04-13',t:'Infleeting',r:'Transport delay FINN',c:2},{w:'2026-04-13',t:'Infleeting',r:'SA number missing',c:2},{w:'2026-04-13',t:'Infleeting',r:'Tire change delayed',c:1},{w:'2026-04-13',t:'Infleeting',r:'PDI delayed compound',c:1},{w:'2026-04-13',t:'Infleeting',r:'Called-off too late',c:1},{w:'2026-04-13',t:'Infleeting',r:'Tires missing FINN',c:1},{w:'2026-04-13',t:'Infleeting',r:'FINN finish incomplete',c:1},{w:'2026-04-13',t:'Infleeting',r:'License plates to wrong address',c:1},{w:'2026-04-13',t:'Infleeting',r:'Wrong car location',c:1},{w:'2026-04-13',t:'Infleeting',r:'Reconditioning delayed',c:1},{w:'2026-04-13',t:'Infleeting',r:'Tech/data issue at compound',c:1},{w:'2026-04-13',t:'Infleeting',r:'Tires damage',c:1},
+  {w:'2026-04-13',t:'Other',r:'Pickup too soon',c:38},
+  {w:'2026-04-13',t:'Tech',r:'General internal Tech error',c:94},{w:'2026-04-13',t:'Tech',r:'Ride not posted',c:38},{w:'2026-04-13',t:'Tech',r:'Weekend/Holiday',c:1},
+  {w:'2026-04-13',t:'Transport',r:'Short notice driver cancel.',c:8},{w:'2026-04-13',t:'Transport',r:'Delivery Breakdown/Damage',c:7},{w:'2026-04-13',t:'Transport',r:'Peak shaving',c:1},
+  // Week Apr 20
+  {w:'2026-04-20',t:'Fleet',r:'ZB II shipping delayed',c:4},{w:'2026-04-20',t:'Fleet',r:'Production delay',c:3},{w:'2026-04-20',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-20',t:'Fleet',r:'Invoice not paid',c:1},{w:'2026-04-20',t:'Fleet',r:'Wrong Car Creation',c:1},{w:'2026-04-20',t:'Fleet',r:'Transport damage OEM/Dealer',c:1},{w:'2026-04-20',t:'Fleet',r:'Invoice not received',c:1},{w:'2026-04-20',t:'Fleet',r:'KBA special approval missing',c:1},
+  {w:'2026-04-20',t:'Infleeting',r:'Compound damage',c:20},{w:'2026-04-20',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-04-20',t:'Infleeting',r:'Registration process delayed',c:7},{w:'2026-04-20',t:'Infleeting',r:'License plates missing',c:6},{w:'2026-04-20',t:'Infleeting',r:'Tech/data issue at compound',c:4},{w:'2026-04-20',t:'Infleeting',r:'Transport delay FINN',c:4},{w:'2026-04-20',t:'Infleeting',r:'Car not ready for pickup',c:4},{w:'2026-04-20',t:'Infleeting',r:'PDI delayed compound',c:3},{w:'2026-04-20',t:'Infleeting',r:'SA number missing',c:3},{w:'2026-04-20',t:'Infleeting',r:'Tire change delayed',c:1},{w:'2026-04-20',t:'Infleeting',r:'Reconditioning delayed',c:1},{w:'2026-04-20',t:'Infleeting',r:'Wrong car location',c:1},{w:'2026-04-20',t:'Infleeting',r:'Incorrect/delayed license plate mounting',c:1},
+  {w:'2026-04-20',t:'Other',r:'Pickup too soon',c:21},{w:'2026-04-20',t:'Other',r:'Pickup date in the past',c:5},{w:'2026-04-20',t:'Other',r:'Unspecified',c:2},
+  {w:'2026-04-20',t:'Tech',r:'General internal Tech error',c:66},{w:'2026-04-20',t:'Tech',r:'Ride not posted',c:5},
+  {w:'2026-04-20',t:'Transport',r:'Short notice driver cancel.',c:18},{w:'2026-04-20',t:'Transport',r:'Delivery Breakdown/Damage',c:4},{w:'2026-04-20',t:'Transport',r:'No driver found',c:2},
+  // Week Apr 27
+  {w:'2026-04-27',t:'Fleet',r:'ZB II shipping delayed',c:8},{w:'2026-04-27',t:'Fleet',r:'Missing Approval OEM',c:4},{w:'2026-04-27',t:'Fleet',r:'Quality block/recall',c:4},{w:'2026-04-27',t:'Fleet',r:'KBA special approval missing',c:2},{w:'2026-04-27',t:'Fleet',r:'PDI material missing OEM/Dealer',c:1},{w:'2026-04-27',t:'Fleet',r:'Wrong ETA',c:1},
+  {w:'2026-04-27',t:'Infleeting',r:'SA number missing',c:23},{w:'2026-04-27',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-27',t:'Infleeting',r:'Car malfunctioning',c:9},{w:'2026-04-27',t:'Infleeting',r:'License plates missing',c:4},{w:'2026-04-27',t:'Infleeting',r:'Registration process delayed',c:4},{w:'2026-04-27',t:'Infleeting',r:'PDI delayed compound',c:3},{w:'2026-04-27',t:'Infleeting',r:'Wrong car location',c:3},{w:'2026-04-27',t:'Infleeting',r:'Tech/data issue at compound',c:2},{w:'2026-04-27',t:'Infleeting',r:'Transport delay FINN',c:2},{w:'2026-04-27',t:'Infleeting',r:'Tires damage',c:1},{w:'2026-04-27',t:'Infleeting',r:'License plates to wrong address',c:1},{w:'2026-04-27',t:'Infleeting',r:'Reconditioning incomplete',c:1},{w:'2026-04-27',t:'Infleeting',r:'Car not found at compound',c:1},{w:'2026-04-27',t:'Infleeting',r:'Tire change delayed',c:1},{w:'2026-04-27',t:'Infleeting',r:'Reconditioning delayed',c:1},{w:'2026-04-27',t:'Infleeting',r:'Called-off too late',c:1},
+  {w:'2026-04-27',t:'Other',r:'Pickup too soon',c:8},{w:'2026-04-27',t:'Other',r:'Pickup date in the past',c:1},
+  {w:'2026-04-27',t:'Tech',r:'General internal Tech error',c:27},{w:'2026-04-27',t:'Tech',r:'Ride not posted',c:8},{w:'2026-04-27',t:'Tech',r:'Readout Error',c:4},
+  {w:'2026-04-27',t:'Transport',r:'Short notice driver cancel.',c:18},{w:'2026-04-27',t:'Transport',r:'Distance too long',c:10},{w:'2026-04-27',t:'Transport',r:'Delivery Breakdown/Damage',c:8},{w:'2026-04-27',t:'Transport',r:'Peak shaving',c:5},{w:'2026-04-27',t:'Transport',r:'Public transport strike',c:1},
+];
+const CR=[
+  {w:'2026-04-06',r:'Handover date change requested',c:262},{w:'2026-04-06',r:'Data validation missing',c:54},{w:'2026-04-06',r:'Deposit payment delayed',c:25},{w:'2026-04-06',r:'SWAP Coordination',c:4},
+  {w:'2026-04-13',r:'Handover date change requested',c:302},{w:'2026-04-13',r:'Deposit payment delayed',c:29},{w:'2026-04-13',r:'SWAP Coordination',c:12},{w:'2026-04-13',r:'Data validation missing',c:9},
+  {w:'2026-04-20',r:'Handover date change requested',c:245},{w:'2026-04-20',r:'Deposit payment delayed',c:30},{w:'2026-04-20',r:'Data validation missing',c:12},
+  {w:'2026-04-27',r:'Handover date change requested',c:334},{w:'2026-04-27',r:'Deposit payment delayed',c:18},{w:'2026-04-27',r:'SWAP Coordination',c:2},
+];
+const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[260,20,25,8],[280,22,26,5]];
+
+// ── HANDOVER SUCCESS RATE ─────────────────────────────────────────────────────
+const HSR_W={
+  '2026-04-06':67.4,'2026-04-13':70.5,'2026-04-20':68.2,'2026-04-27':72.9
+};
+const HSR_M=[68.0,68.4,67.1,69.2,70.8,70.5,69.8]; // Oct–Apr
 
 // ── SLACK STATUS ──────────────────────────────────────────────────────────────
 const SLACK={
   infleeting:{ok:true,date:'04 May 2026',
-    summary:'W18: SA missing spike (+45, Mosolf Kippenheim personnel change + Etzin full pickup area). Tech/data issue at compound (62, WHV migration – resolved 05.05). ZB II wrong address MG (15, CLM issue – 54 cases identified). Upcoming: BYD 152 PDI missing, Fiat Recall resolution expected KW19.'},
+    summary:'W18: SA missing spike (+45, Mosolf Kippenheim personnel change + Etzin full pickup area). WHV migration resolved 05.05. ZB II wrong address MG (15 cases). Fiat Recall resolution expected KW19.'},
   tech:{ok:true,date:'05 May 2026',
-    summary:'W18: 249 delays (excl. Early Swaps). General tech error near-zero (2, -94% vs W16). Pickup too soon 6 (-67%). Ride not posted 1 (-86%). New: RTD-gate SA-number mandatory (~65% SA-missing reduction expected). RTD damage-gate (~30% short-notice reduction).'},
+    summary:'W18: 249 delays (excl. Early Swaps). General tech error near-zero. RTD-gate SA-number mandatory in progress (~65% SA-missing reduction). RTD damage-gate in progress (~30% short-notice reduction).'},
 };
 
-// ── HANDOVER SUCCESS RATE ─────────────────────────────────────────────────────
-const HSR_W={'2026-03-09':68.1,'2026-03-16':70.2,'2026-03-23':75.1,'2026-03-30':70.7,'2026-04-06':67.4,'2026-04-13':70.5,'2026-04-20':68.2,'2026-04-27':72.9};
-const HSR_M=[68.0,68.4,67.1,69.2,70.8,70.5,69.8]; // Oct–Apr
-
-// ── NOTICE PERIOD (real DWH data, total_days_negative < 0 = late) ─────────────
-// Monthly Oct–Mar
-// Notice Period: DATE_DIFF(previous_handover_date, day_shifted, DAY)
-// Late = <1 day, Short = 1–3 days, Normal = >3 days
-// Split: FINN-initiated (is_finn_shift=TRUE) vs Customer-initiated (is_finn_shift=FALSE)
+// ── NOTICE PERIOD (DATE_DIFF(previous_handover_date, day_shifted, DAY)) ───────
 const NP={
   finn:{
     monthly:{
@@ -271,31 +308,6 @@ const NP={
     },
   },
 };
-
-// ── DELAY DATA ────────────────────────────────────────────────────────────────
-
-const WR=[
-  {w:'2026-04-06',t:'Fleet',r:'Invoice not paid',c:22},{w:'2026-04-06',t:'Fleet',r:'Production delay',c:3},{w:'2026-04-06',t:'Fleet',r:'Missing Approval OEM',c:2},{w:'2026-04-06',t:'Fleet',r:'ZB II shipping delayed',c:2},
-  {w:'2026-04-06',t:'Infleeting',r:'PDI delayed compound',c:17},{w:'2026-04-06',t:'Infleeting',r:'Compound damage',c:15},{w:'2026-04-06',t:'Infleeting',r:'License plates missing',c:9},{w:'2026-04-06',t:'Infleeting',r:'Car malfunctioning',c:9},{w:'2026-04-06',t:'Infleeting',r:'SA number missing',c:6},{w:'2026-04-06',t:'Infleeting',r:'Tech/data issue at compound',c:4},
-  {w:'2026-04-06',t:'Other',r:'Pickup too soon',c:56},{w:'2026-04-06',t:'Tech',r:'General internal Tech error',c:60},{w:'2026-04-06',t:'Tech',r:'Ride not posted',c:28},{w:'2026-04-06',t:'Tech',r:'Weekend/Holiday',c:6},{w:'2026-04-06',t:'Transport',r:'Short notice driver cancel.',c:4},{w:'2026-04-06',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
-  {w:'2026-04-13',t:'Fleet',r:'Wrong ETA',c:32},{w:'2026-04-13',t:'Fleet',r:'Production delay',c:4},{w:'2026-04-13',t:'Fleet',r:'Missing Approval OEM',c:2},
-  {w:'2026-04-13',t:'Infleeting',r:'License plates missing',c:26},{w:'2026-04-13',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-13',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-04-13',t:'Infleeting',r:'SA number missing',c:2},
-  {w:'2026-04-13',t:'Other',r:'Pickup too soon',c:38},{w:'2026-04-13',t:'Tech',r:'General internal Tech error',c:95},{w:'2026-04-13',t:'Tech',r:'Ride not posted',c:38},{w:'2026-04-13',t:'Transport',r:'Short notice driver cancel.',c:8},{w:'2026-04-13',t:'Transport',r:'Delivery Breakdown/Damage',c:7},
-  {w:'2026-04-20',t:'Fleet',r:'Production delay',c:11},{w:'2026-04-20',t:'Fleet',r:'Missing Approval OEM',c:4},{w:'2026-04-20',t:'Fleet',r:'ZB II shipping delayed',c:4},{w:'2026-04-20',t:'Fleet',r:'Wrong ETA',c:2},
-  {w:'2026-04-20',t:'Infleeting',r:'Compound damage',c:23},{w:'2026-04-20',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-04-20',t:'Infleeting',r:'License plates missing',c:7},{w:'2026-04-20',t:'Infleeting',r:'Registration process delayed',c:7},{w:'2026-04-20',t:'Infleeting',r:'Tech/data issue at compound',c:4},{w:'2026-04-20',t:'Infleeting',r:'SA number missing',c:3},
-  {w:'2026-04-20',t:'Other',r:'Pickup too soon',c:21},{w:'2026-04-20',t:'Tech',r:'General internal Tech error',c:66},{w:'2026-04-20',t:'Tech',r:'Ride not posted',c:5},{w:'2026-04-20',t:'Transport',r:'Short notice driver cancel.',c:18},{w:'2026-04-20',t:'Transport',r:'Delivery Breakdown/Damage',c:4},
-  {w:'2026-04-27',t:'Fleet',r:'ZB II shipping delayed',c:11},{w:'2026-04-27',t:'Fleet',r:'Quality block/recall',c:5},{w:'2026-04-27',t:'Fleet',r:'Missing Approval OEM',c:4},{w:'2026-04-27',t:'Fleet',r:'Wrong ETA',c:1},
-  {w:'2026-04-27',t:'Infleeting',r:'SA number missing',c:23},{w:'2026-04-27',t:'Infleeting',r:'Compound damage',c:13},{w:'2026-04-27',t:'Infleeting',r:'Car malfunctioning',c:10},{w:'2026-04-27',t:'Infleeting',r:'Registration process delayed',c:5},{w:'2026-04-27',t:'Infleeting',r:'PDI delayed compound',c:4},{w:'2026-04-27',t:'Infleeting',r:'License plates missing',c:4},{w:'2026-04-27',t:'Infleeting',r:'Tech/data issue at compound',c:2},
-  {w:'2026-04-27',t:'Other',r:'Pickup too soon',c:8},{w:'2026-04-27',t:'Tech',r:'General internal Tech error',c:27},{w:'2026-04-27',t:'Tech',r:'Ride not posted',c:8},{w:'2026-04-27',t:'Tech',r:'Readout Error',c:4},{w:'2026-04-27',t:'Transport',r:'Short notice driver cancel.',c:18},{w:'2026-04-27',t:'Transport',r:'Distance too long',c:10},{w:'2026-04-27',t:'Transport',r:'Delivery Breakdown/Damage',c:8},{w:'2026-04-27',t:'Transport',r:'Peak shaving',c:5},
-];
-
-const CR=[
-  {w:'2026-04-06',r:'Handover date change requested',c:262},{w:'2026-04-06',r:'Data validation missing',c:54},{w:'2026-04-06',r:'Deposit payment delayed',c:25},{w:'2026-04-06',r:'SWAP Coordination',c:4},
-  {w:'2026-04-13',r:'Handover date change requested',c:302},{w:'2026-04-13',r:'Deposit payment delayed',c:29},{w:'2026-04-13',r:'SWAP Coordination',c:12},{w:'2026-04-13',r:'Data validation missing',c:9},
-  {w:'2026-04-20',r:'Handover date change requested',c:245},{w:'2026-04-20',r:'Deposit payment delayed',c:30},{w:'2026-04-20',r:'Data validation missing',c:12},
-  {w:'2026-04-27',r:'Handover date change requested',c:334},{w:'2026-04-27',r:'Deposit payment delayed',c:18},{w:'2026-04-27',r:'SWAP Coordination',c:2},
-];
-const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[260,20,25,8],[290,25,28,6]];
 
 // ── INITIATIVES (detailed) ────────────────────────────────────────────────────
 const INITS={
@@ -472,8 +484,8 @@ const DVIDER={id:'dv',afterDraw(c){
   ctx.restore();
 }};
 
-let CM=null,RM=null,NPC=null,HSRC=null,activeTab='Overall';
 Chart.register(ChartDataLabels);
+let CM=null,RM=null,NPC=null,HSRC=null,activeTab='Overall';
 
 // ── CHART: Main stacked bar ───────────────────────────────────────────────────
 function buildMain(tab){
@@ -515,8 +527,7 @@ function buildMain(tab){
         x:{stacked:true,ticks:{font:{size:10},color:function(c){return c.index<NM?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
         y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}},
       }
-    },
-    plugins:[DVIDER,ChartDataLabels]
+    }
   });
 }
 
@@ -543,7 +554,7 @@ function buildReason(tab){
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},datalabels:{display:false},tooltip:{mode:'index',intersect:false}},
       scales:{x:{ticks:{font:{size:10},color:(c)=>c.index<NM?'#3a3a3a':'#777',maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},y:{beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}}}
-    },plugins:[DVIDER,ChartDataLabels]
+    }
   });
 }
 
@@ -618,22 +629,7 @@ function buildNotice(ntab){
         x:{stacked:true,ticks:{font:{size:10},color:function(c){return c.index<NML?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
         y:{stacked:true,beginAtZero:true,ticks:{font:{size:10},color:'#555'},grid:{color:'rgba(255,255,255,0.05)'}},
       }
-    },
-    plugins:[{
-      id:'dvN',
-      afterDraw:function(chart){
-        const c2=chart.ctx;
-        const xScale=chart.scales.x;
-        const yScale=chart.scales.y;
-        if(!xScale||!yScale)return;
-        const px=(xScale.getPixelForValue(NML-1)+xScale.getPixelForValue(NML))/2;
-        c2.save();c2.setLineDash([5,5]);c2.strokeStyle='rgba(255,255,255,0.2)';c2.lineWidth=1.5;
-        c2.beginPath();c2.moveTo(px,yScale.top);c2.lineTo(px,yScale.bottom);c2.stroke();
-        c2.fillStyle='rgba(255,255,255,0.25)';c2.font='9px sans-serif';
-        c2.fillText('monthly | weekly',px-44,yScale.top-4);
-        c2.restore();
-      }
-    },ChartDataLabels]
+    }
   });
 }
 
@@ -685,8 +681,7 @@ function buildHSR(){
         x:{ticks:{font:{size:10},color:function(c){return c.index<NM?'#3a3a3a':'#777';},maxRotation:35,autoSkip:false},grid:{color:'rgba(255,255,255,0.03)'}},
         y:{min:40,max:100,ticks:{font:{size:10},color:'#555',callback:function(v){return v+'%';}},grid:{color:'rgba(255,255,255,0.05)'}},
       }
-    },
-    plugins:[DVIDER,ChartDataLabels]
+    }
   });
 }
 
