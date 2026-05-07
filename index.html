@@ -157,12 +157,12 @@ const RP={
   Customer:['#D4537E','#7F77DD','#EF9F27','#5DCAA5'],
 };
 
-const ML=['Oct','Nov','Dec','Jan','Feb','Mar'];
-const MONTHS=['2025-10-01','2025-11-01','2025-12-01','2026-01-01','2026-02-01','2026-03-01'];
+const ML=['Oct','Nov','Dec','Jan','Feb','Mar','Apr'];
+const MONTHS=['2025-10-01','2025-11-01','2025-12-01','2026-01-01','2026-02-01','2026-03-01','2026-04-01'];
 const WL=['Mar 9','Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27'];
 const WEEKS=['2026-03-09','2026-03-16','2026-03-23','2026-03-30','2026-04-06','2026-04-13','2026-04-20','2026-04-27'];
 const ALL=[...ML,...WL];
-const NM=6;
+const NM=7;
 
 // Period completion
 function isWeekComplete(w){
@@ -188,15 +188,15 @@ const SLACK={
 
 // ── HANDOVER SUCCESS RATE ─────────────────────────────────────────────────────
 const HSR_W={'2026-03-09':68.1,'2026-03-16':70.2,'2026-03-23':75.1,'2026-03-30':70.7,'2026-04-06':67.4,'2026-04-13':70.5,'2026-04-20':68.2,'2026-04-27':72.9};
-const HSR_M=[68.0,68.4,67.1,69.2,70.8,70.5]; // Oct–Mar
+const HSR_M=[68.0,68.4,67.1,69.2,70.8,70.5,69.8]; // Oct–Apr
 
 // ── NOTICE PERIOD (real DWH data, total_days_negative < 0 = late) ─────────────
 // Monthly Oct–Mar
 const NP_M={
-  labels:['Oct','Nov','Dec','Jan','Feb','Mar'],
-  late: [235,115,189,346,242, 56],
-  short:[ 66, 23, 56, 63, 59,  4],
-  long: [751,654,798,1070,931,297],
+  labels:['Oct','Nov','Dec','Jan','Feb','Mar','Apr'],
+  late: [235,115,189,346,242, 56,149],
+  short:[ 66, 23, 56, 63, 59,  4, 35],
+  long: [751,654,798,1070,931,297,767],
 };
 // Weekly Mar 9 – Apr 27 (complete weeks only)
 const NP_W={
@@ -208,42 +208,44 @@ const NP_W={
 // ── DELAY DATA ────────────────────────────────────────────────────────────────
 const MDATA={
   Fleet:{
-    'Invoice not paid':         [155,155,126,138,136,44],
-    'Transport Delay OEM/Dealer':[108,108,161, 99, 49, 3],
-    'ZB II shipping delayed':   [ 48, 48, 63, 81, 24,30],
-    'Production delay':         [ 43, 43, 60, 96, 22,11],
-    'Transport damage OEM/Dealer':[31,31, 48, 50, 29, 8],
-    'Quality block/recall':     [ 14, 14, 22, 36, 20, 2],
-    'KBA special approval missing':[0,0,  0, 19, 18, 9],
-    'Missing Approval OEM':     [  0,  0,  0,  0, 13,24],
-    'Wrong ETA':                [  0,  0,  0, 15, 11, 1],
+    'Invoice not paid':         [155,155,126,138,136,44, 23],
+    'Transport Delay OEM/Dealer':[108,108,161, 99, 49, 3,  3],
+    'ZB II shipping delayed':   [ 48, 48, 63, 81, 24,30, 16],
+    'Production delay':         [ 43, 43, 60, 96, 22,11, 19],
+    'Transport damage OEM/Dealer':[31,31, 48, 50, 29, 8,  5],
+    'Quality block/recall':     [ 14, 14, 22, 36, 20, 2,  7],
+    'KBA special approval missing':[0,0,  0, 19, 18, 9,  6],
+    'Missing Approval OEM':     [  0,  0,  0,  0, 13,24, 13],
+    'Wrong ETA':                [  0,  0,  0, 15, 11, 1, 39],
   },
   Infleeting:{
-    'PDI delayed compound':     [ 37, 37,109,164,142,28],
-    'Car malfunctioning':       [ 38, 38, 45, 52, 50,10],
-    'Compound damage':          [ 37, 37, 31, 28, 45, 8],
-    'SA number missing':        [ 34, 34,  7, 28, 40, 9],
-    'Car not ready for pickup': [  0,  0,  1, 33,103,25],
-    'Tires missing FINN':       [ 20, 20, 52, 52, 19,12],
-    'Registration process delayed':[14,14,25, 26, 25,14],
-    'License plates missing':   [  9,  9,  8,  9, 19, 3],
-    'Transport delay FINN':     [  1,  1,  4, 48, 23, 2],
-    'Tech/data issue at compound':[15,15, 18,  9,  2, 1],
+    'PDI delayed compound':     [ 37, 37,109,164,142,28, 32],
+    'Car malfunctioning':       [ 38, 38, 45, 52, 50,10, 40],
+    'Compound damage':          [ 37, 37, 31, 28, 45, 8, 56],
+    'SA number missing':        [ 34, 34,  7, 28, 40, 9, 33],
+    'Car not ready for pickup': [  0,  0,  1, 33,103,25, 18],
+    'Tires missing FINN':       [ 20, 20, 52, 52, 19,12,  1],
+    'Registration process delayed':[14,14,25, 26, 25,14, 30],
+    'License plates missing':   [  9,  9,  8,  9, 19, 3, 47],
+    'Transport delay FINN':     [  1,  1,  4, 48, 23, 2, 17],
+    'Tech/data issue at compound':[15,15, 18,  9,  2, 1, 17],
   },
   Tech:{
-    'General internal Tech error':[44,44,64,93,119,27],
-    'Weekend/Holiday':          [  4,  4,  0, 92,  2, 0],
-    'Ride not posted':          [  0,  0,  0,  0, 16, 9],
-    'Readout Error':            [  0,  0,  0,  0,  3,12],
+    'General internal Tech error':[44,44,64,93,119,27,264],
+    'Weekend/Holiday':          [  4,  4,  0, 92,  2, 0,  7],
+    'Ride not posted':          [  0,  0,  0,  0, 16, 9, 82],
+    'Readout Error':            [  0,  0,  0,  0,  3,12,  6],
   },
   Transport:{
-    'Short notice driver cancel.':[28,28,54,116,52, 4],
-    'Delivery Breakdown/Damage':[ 27, 27, 24, 17, 15, 2],
-    'No driver found':          [  6,  6, 17, 13,  8, 0],
+    'Short notice driver cancel.':[28,28,54,116,52, 4, 47],
+    'Delivery Breakdown/Damage':[ 27, 27, 24, 17, 15, 2, 24],
+    'No driver found':          [  6,  6, 17, 13,  8, 0,  3],
+    'Distance too long':        [  0,  0,  0,  0,  0, 0, 10],
+    'Peak shaving':             [  0,  0,  0,  0,  0, 0,  6],
   },
   Other:{
-    'Pickup too soon':          [  0,  0,  0,  0,123,40],
-    'Unspecified':              [  8,  8, 32, 75, 14, 2],
+    'Pickup too soon':          [  0,  0,  0,  0,123,40,134],
+    'Unspecified':              [  8,  8, 32, 75, 14, 2,  6],
   },
 };
 
@@ -284,7 +286,7 @@ const CR=[
   {w:'2026-04-20',r:'Handover date change requested',c:245},{w:'2026-04-20',r:'Deposit payment delayed',c:30},{w:'2026-04-20',r:'Data validation missing',c:12},
   {w:'2026-04-27',r:'Handover date change requested',c:334},{w:'2026-04-27',r:'Deposit payment delayed',c:18},{w:'2026-04-27',r:'SWAP Coordination',c:2},
 ];
-const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[175,10,20,8]];
+const CUSTM=[[130,4,18,3],[156,0,5,0],[240,8,20,8],[180,15,15,5],[310,14,35,10],[175,10,20,8],[290,25,28,6]];
 
 // ── INITIATIVES (detailed) ────────────────────────────────────────────────────
 const INITS={
@@ -697,23 +699,39 @@ function render(){
   }).join('');
   const totrow=`<tr class="trow"><td>Total</td>${MONTHS.map((_,mi)=>{const isL=mi===LCMI;return `<td class="${mi===0?'tddiv':''}" style="${isL?'color:#ddd':''}">${at(mi,tab)}</td>`;}).join('')}${WEEKS.map((w,wi)=>{const isL=w===LCW;return `<td class="${wi===0?'tddiv':''}" style="${isL?'color:#fff;font-weight:600':'color:#555'}">${at(NM+wi,tab)}</td>`;}).join('')}</tr>`;
 
-  // Data basis strings
+  // Data basis strings — dynamic per active tab
+  const teamFilterTag = isOv
+    ? `<span class="tag">delay_responsible_team ≠ 'Non-Ops Delays'</span><span class="tag" style="background:rgba(180,178,169,0.12);border-color:rgba(180,178,169,0.3);color:#B4B2A9">All FINN teams aggregated</span>`
+    : tab === 'Customer'
+      ? `<span class="tag" style="background:rgba(212,83,126,0.12);border-color:rgba(212,83,126,0.3);color:#D4537E">is_finn_shift = FALSE</span><span class="tag" style="background:rgba(212,83,126,0.12);border-color:rgba(212,83,126,0.3);color:#D4537E">delay_responsible_team = 'Non-Ops Delays'</span>`
+      : `<span class="tag" style="background:${TC[tab]}22;border-color:${TC[tab]}55;color:${TC[tab]}">delay_responsible_team = '${tab}'</span><span class="tag" style="background:${TC[tab]}22;border-color:${TC[tab]}55;color:${TC[tab]}">is_finn_shift = TRUE</span>`;
+
   const mainBasis=`<strong>Filters applied</strong>
-    <span class="tag">delay_days > 0</span><span class="tag">is_silent_delay = FALSE</span><span class="tag">is_finn_shift = TRUE</span><span class="tag">delay_responsible_team ≠ 'Non-Ops Delays'</span>
+    <span class="tag">delay_days > 0</span>
+    <span class="tag">is_silent_delay = FALSE</span>
+    ${teamFilterTag}
+    <br><strong>Active tab filter</strong> ${
+      isOv ? 'Showing all FINN teams stacked. Each team = its own delay_responsible_team bucket.'
+      : tab === 'Customer' ? 'Customer-caused delays: is_finn_shift = FALSE, delay_responsible_team = Non-Ops Delays.'
+      : `Showing only delays where delay_responsible_team = '${tab}'. Other teams excluded.`
+    }
     <br><strong>Source</strong> datawarehouse-304513.semantic.fact_car_handover_event
-    <br><strong>Note</strong> Monthly = calendar month totals. Weekly = Mon–Sun. Only completed periods used for KPI comparisons. Current partial week shown separately.`;
+    <br><strong>Period logic</strong> Monthly = full calendar month. Weekly = Mon–Sun. Deltas use last complete ↔ prev complete period only.`;
+
   const noticeBasis=`<strong>Filters applied</strong>
     <span class="tag">delay_days > 0</span><span class="tag">is_silent_delay = FALSE</span><span class="tag">is_finn_shift = TRUE</span><span class="tag">delay_responsible_team ≠ 'Non-Ops Delays'</span>
+    <br><strong>Note</strong> Notice period applies to all FINN-caused delays regardless of active tab filter.
     <br><strong>Definitions</strong>
-    <span class="tag">Late notice</span> total_days_negative &lt; 0 → shift happened after the original handover date (already overdue)
-    <span class="tag">Short notice</span> total_days_negative = 0 AND total_days_positive 0–3 → communicated 0–3 days before handover
-    <span class="tag">Long notice</span> total_days_positive ≥ 4 → communicated 4+ days before handover (customer has time to plan)
+    <span class="tag" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#EF4444">Late notice</span> total_days_negative &lt; 0 → shift created <em>after</em> original handover date (customer already overdue)
+    <span class="tag" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#F59E0B">Short notice</span> total_days_positive 0–3 AND total_days_negative = 0 → communicated 0–3 days before handover
+    <span class="tag" style="background:rgba(55,138,221,0.15);border-color:rgba(55,138,221,0.4);color:#378ADD">Long notice</span> total_days_positive ≥ 4 → communicated 4+ days in advance (customer can plan)
     <br><strong>Source</strong> fact_car_handover_event · columns: total_days_negative, total_days_positive`;
+
   const hsrBasis=`<strong>Filters applied</strong>
     <span class="tag">touchpoint_type_id = 'handover_success_rate'</span>
-    <br><strong>Definition</strong> Successful handover touchpoint = vehicle was handed over to customer without issues on the scheduled date.
-    Success Rate = successful / (successful + failed) × 100.
-    <br><strong>Note</strong> May 11 onwards: data not yet fully populated (touchpoints recorded with delay).
+    <br><strong>Note</strong> HSR is not broken down by delay_responsible_team — it reflects overall handover performance regardless of active tab.
+    <br><strong>Definition</strong> success = vehicle handed over to customer on scheduled date without issues. HSR = successful / (successful + failed) × 100.
+    <br><strong>Target</strong> ≥ 70% · May 11 onwards: touchpoints not yet fully populated in DWH (recorded with delay).
     <br><strong>Source</strong> datawarehouse-304513.semantic.fact_clsr_touchpoints`;
 
   document.getElementById('dash').innerHTML=`
