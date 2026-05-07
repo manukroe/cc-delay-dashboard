@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CC Logistics · Delay Dashboard</title>
+<style>
+  #gate{position:fixed;inset:0;background:#0d0f14;display:flex;align-items:center;justify-content:center;z-index:9999;}
+  .gate-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:40px 48px;text-align:center;min-width:320px;}
+  .gate-logo{font-size:13px;font-weight:600;color:#378ADD;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;}
+  .gate-title{font-size:18px;font-weight:600;color:#fff;margin-bottom:6px;font-family:'DM Sans',sans-serif;}
+  .gate-sub{font-size:12px;color:#555;margin-bottom:28px;}
+  .gate-input{width:100%;padding:11px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-size:14px;font-family:'DM Mono',monospace;letter-spacing:.08em;text-align:center;outline:none;transition:border-color .2s;}
+  .gate-input:focus{border-color:#378ADD;}
+  .gate-input.error{border-color:#f87171;animation:shake .3s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}</p>
+  .gate-btn{margin-top:14px;width:100%;padding:11px;background:#378ADD;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+  .gate-btn:hover{opacity:.85;}
+  .gate-error{font-size:11px;color:#f87171;margin-top:10px;min-height:16px;}
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
@@ -89,9 +103,43 @@
 </style>
 </head>
 <body>
-<div class="dash" id="dash"></div>
+<!-- Passcode gate -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">FINN · CC Logistics</div>
+    <div class="gate-title">Delay Dashboard</div>
+    <div class="gate-sub">Bitte Zugangscode eingeben</div>
+    <input class="gate-input" id="gateInput" type="password" placeholder="••••••••••••••••" maxlength="32"
+      onkeydown="if(event.key==='Enter')checkCode()">
+    <button class="gate-btn" onclick="checkCode()">Zugang →</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
+
+<div class="dash" id="dash" style="display:none"></div>
 
 <script>
+function checkCode(){
+  const val=document.getElementById('gateInput').value;
+  const inp=document.getElementById('gateInput');
+  if(val==='CCLogisticsWinners'){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('dash').style.display='block';
+    sessionStorage.setItem('ccauth','1');
+    render();
+  } else {
+    inp.classList.add('error');
+    document.getElementById('gateError').textContent='Falscher Code – bitte erneut versuchen.';
+    setTimeout(()=>inp.classList.remove('error'),400);
+    inp.value='';
+  }
+}
+// Auto-unlock if already authenticated in this session
+if(sessionStorage.getItem('ccauth')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('dash').style.display='block';
+}
+
 const TEAMS=['Infleeting','Tech','Transport','Fleet','Other'];
 const TC={Infleeting:'#378ADD',Tech:'#1D9E75',Transport:'#6b7280',Fleet:'#9ca3af',Other:'#6b7280',Customer:'#D4537E'};
 const WEEKS=['2026-03-09','2026-03-16','2026-03-23','2026-03-30','2026-04-06','2026-04-13','2026-04-20','2026-04-27','2026-05-04','2026-05-11'];
@@ -364,7 +412,8 @@ function buildChart(tab,color){
 }
 
 window.setTab=function(t){activeTab=t;render();};
-render();
+// Only render if already unlocked (gate handles initial render on success)
+if(sessionStorage.getItem('ccauth')==='1') render();
 </script>
 </body>
 </html>
